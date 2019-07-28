@@ -1,0 +1,20 @@
+{
+  "name": "react-native-animated-navigation",
+  "version": "0.1.0",
+  "description": "Animated Navigation for React Native",
+  "main": "index.js",
+  "author": "Ivan Zotov",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "format": "prettier --trailing-comma es5 --single-quote --write 'src/*.js' 'index.*.js'"
+  },
+  "peerDependencies": {
+    "react-native": "^0.58.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.15.0",
+    "prettier": "^1.16.4"
+  }
+}
