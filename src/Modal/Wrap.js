@@ -8,11 +8,34 @@ export default class Wrap extends Component {
     backgroundColor: 'white',
   };
 
+  state = {
+    mounted: !!this.props.scene.active,
+    disabled: this.props.scene.disabled,
+  };
+
+  disabledListener = this.props.scene.onDisabledSubscribe(
+    'default',
+    disabled => {
+      this.setState({ disabled });
+    }
+  );
+
+  prevActive = this.props.scene.active;
+  activeListener = this.props.scene.anim.active.addListener(({ value }) => {
+    const mounted = value === 1 || (this.prevActive > value && value !== 0);
+    if (mounted !== this.state.mounted) {
+      this.setState({ mounted });
+    }
+    this.prevActive = value;
+  });
+
   render() {
     const { scene, children, backgroundColor } = this.props;
+    const { mounted, disabled } = this.state;
 
     return (
       <Animated.View
+        pointerEvents={disabled ? 'none' : 'auto'}
         style={[
           {
             position: 'absolute',
@@ -23,17 +46,16 @@ export default class Wrap extends Component {
           {
             transform: [
               {
-                translateY: scene.states.active.interpolate({
+                translateY: scene.anim.active.interpolate({
                   inputRange: [0, 1],
                   outputRange: [height, 0],
                 }),
               },
             ],
           },
-          this.props.style,
         ]}
       >
-        {children}
+        {typeof children === 'function' ? children({ mounted }) : children}
       </Animated.View>
     );
   }
