@@ -3,7 +3,7 @@ import { Animated, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
 
-export default class Component extends Component {
+export default class Wrap extends Component {
   static defaultProps = {
     backgroundColor: 'white',
   };

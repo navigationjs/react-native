@@ -1,40 +1,26 @@
-import React from 'react';
-import { Animated, Dimensions } from 'react-native';
+import { Animated } from 'react-native';
 
-const { height } = Dimensions.get('window');
+export default class Scene {
+  constructor({ active = 0 } = {}) {
+    this.states = {
+      active: new Animated.Value(active),
+    };
+  }
 
-export default class Component extends React.Component {
-  static defaultProps = {
-    backgroundColor: 'white',
-  };
+  show() {
+    this.__setActive(1);
+  }
 
-  render() {
-    const { scene, children, backgroundColor } = this.props;
+  hide() {
+    this.__setActive(0);
+  }
 
-    return (
-      <Animated.View
-        style={[
-          {
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-            backgroundColor,
-          },
-          {
-            transform: [
-              {
-                translateY: scene.states.active.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [height, 0],
-                }),
-              },
-            ],
-          },
-          this.props.style,
-        ]}
-      >
-        {children}
-      </Animated.View>
-    );
+  __setActive(weight = 1) {
+    this.states.active.stopAnimation(() => {
+      Animated.timing(this.states.active, {
+        toValue: weight,
+        duration: 200,
+      }).start();
+    });
   }
 }

@@ -1,3 +1,5 @@
-import AnimatedNavigation from './src'
+import Stack from './src/Stack';
+import Tab from './src/Tab';
+import Modal from './src/Modal';
 
-export default AnimatedNavigation
+export { Stack, Tab, Modal };

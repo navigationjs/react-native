@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Animated, Dimensions } from 'react-native';
 
-const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
-export default class Component extends Component {
+export default class Wrap extends Component {
   static defaultProps = {
     backgroundColor: 'white',
   };
@@ -23,9 +23,9 @@ export default class Component extends Component {
           {
             transform: [
               {
-                translateX: scene.states.active.interpolate({
+                translateY: scene.states.active.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [width, 0],
+                  outputRange: [height, 0],
                 }),
               },
             ],

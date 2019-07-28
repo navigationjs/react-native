@@ -1,9 +1,7 @@
-import Navigator from './Navigator'
 import Scene from './Scene'
-import Component from './Component'
+import Wrap from './Wrap'
 
-export {
-  Navigator,
+export default {
   Scene,
-  Component
+  Wrap
 }
