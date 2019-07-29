@@ -4,10 +4,6 @@ import { Animated, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 
 export default class Wrap extends Component {
-  static defaultProps = {
-    backgroundColor: 'white',
-  };
-
   state = {
     mounted: !!this.props.scene.active,
     disabled: this.props.scene.disabled,
@@ -30,7 +26,7 @@ export default class Wrap extends Component {
   });
 
   render() {
-    const { scene, children, backgroundColor } = this.props;
+    const { scene, children } = this.props;
     const { mounted, disabled } = this.state;
 
     return (
@@ -41,7 +37,6 @@ export default class Wrap extends Component {
             position: 'absolute',
             width: '100%',
             height: '100%',
-            backgroundColor,
           },
           {
             transform: [

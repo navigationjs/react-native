@@ -4,12 +4,8 @@ import { Animated, Dimensions } from 'react-native';
 const { height } = Dimensions.get('window');
 
 export default class Wrap extends Component {
-  static defaultProps = {
-    backgroundColor: 'white',
-  };
-
   render() {
-    const { scene, children, backgroundColor } = this.props;
+    const { scene, children } = this.props;
 
     return (
       <Animated.View
@@ -18,7 +14,6 @@ export default class Wrap extends Component {
             position: 'absolute',
             width: '100%',
             height: '100%',
-            backgroundColor,
           },
           {
             transform: [
@@ -30,7 +25,6 @@ export default class Wrap extends Component {
               },
             ],
           },
-          this.props.style,
         ]}
       >
         {children}
