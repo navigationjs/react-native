@@ -2,7 +2,7 @@ import { Animated } from 'react-native';
 
 export default class Scene {
   constructor({ active = 0 } = {}) {
-    this.states = {
+    this.anim = {
       active: new Animated.Value(active),
     };
   }
@@ -16,8 +16,8 @@ export default class Scene {
   }
 
   __setActive(weight = 1) {
-    this.states.active.stopAnimation(() => {
-      Animated.timing(this.states.active, {
+    this.anim.active.stopAnimation(() => {
+      Animated.timing(this.anim.active, {
         toValue: weight,
         duration: 0,
       }).start();
