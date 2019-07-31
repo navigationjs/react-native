@@ -26,7 +26,7 @@ export default class Wrap extends Component {
   });
 
   render() {
-    const { scene, children } = this.props;
+    const { scene, children, style } = this.props;
     const { mounted, disabled } = this.state;
 
     return (
@@ -37,6 +37,7 @@ export default class Wrap extends Component {
             position: 'absolute',
             width: '100%',
             height: '100%',
+            backgroundColor: 'white',
           },
           {
             transform: [
@@ -54,6 +55,7 @@ export default class Wrap extends Component {
               },
             ],
           },
+          style,
         ]}
       >
         {typeof children === 'function' ? children({ mounted }) : children}
