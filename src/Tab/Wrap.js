@@ -19,7 +19,7 @@ export default class Wrap extends Component {
           {
             transform: [
               {
-                translateY: scene.states.active.interpolate({
+                translateY: scene.anim.active.interpolate({
                   inputRange: [0, 1],
                   outputRange: [height, 0],
                 }),
