@@ -1,11 +1,12 @@
 import React from 'react';
 import { Animated, Dimensions } from 'react-native';
 
-export default function Wrap({ scene, children, style }) {
+export default function Wrap({ scene, children, style, ...props }) {
   const { height } = Dimensions.get('window');
 
   return (
     <Animated.View
+      {...props}
       style={[
         {
           position: 'absolute',

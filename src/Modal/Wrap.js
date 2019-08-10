@@ -16,7 +16,7 @@ export default class Wrap extends Component {
   }
 
   render() {
-    const { scene, children, overlay, style } = this.props;
+    const { scene, children, overlay, style, ...props } = this.props;
     const { direction } = this.state;
 
     return (
@@ -43,6 +43,7 @@ export default class Wrap extends Component {
           />
         )}
         <Animated.View
+          {...props}
           style={[
             {
               position: 'absolute',

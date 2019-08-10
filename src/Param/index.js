@@ -19,15 +19,17 @@ export default class Param {
   }
 
   to = (value, duration = this.defaultDuration) => {
+    link.wrap && link.wrap.disable();
     return new Promise(resolve => {
-      link.wrap && link.wrap.disable();
-      Animated.timing(this.value, {
-        toValue: value,
-        duration,
-      }).start(() => {
-        link.wrap && link.wrap.enable();
-        resolve();
-      });
+      this.value.stopAnimation(() => {
+        Animated.timing(this.value, {
+          toValue: value,
+          duration,
+        }).start(() => {
+          link.wrap && link.wrap.enable();
+          resolve();
+        });
+      })
     });
   };
 }

@@ -16,11 +16,12 @@ export default class Wrap extends Component {
   }
 
   render() {
-    const { scene, children, style } = this.props;
+    const { scene, children, style, ...props } = this.props;
     const { direction } = this.state;
 
     return (
       <Animated.View
+        {...props}
         style={[
           {
             position: 'absolute',

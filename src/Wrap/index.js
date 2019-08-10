@@ -18,11 +18,11 @@ export default class Wrap extends Component {
   disable = () => this.setState({ disabled: true });
 
   render() {
-    const { children } = this.props;
+    const { children, ...props } = this.props;
     const { disabled } = this.state;
 
     return (
-      <View style={{ flex: 1 }} pointerEvents={disabled ? 'none' : 'auto'}>
+      <View {...props} style={{ flex: 1 }} pointerEvents={disabled ? 'none' : 'auto'}>
         {children}
       </View>
     );
