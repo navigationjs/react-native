@@ -1,10 +1,11 @@
 export default class Navigator {
-  constructor({ scenes = {} }) {
+  constructor(scenes = {}) {
     this.scenes = scenes;
   }
 
-  to(scene) {
-    Object.values(this.scenes).forEach(it => it.hide());
-    scene.show();
-  }
+  to = scene => {
+    const promises = Object.values(this.scenes).map(it => it.hide());
+    promises.push(scene.show());
+    return Promise.all(promises);
+  };
 }
