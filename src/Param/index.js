@@ -7,7 +7,7 @@ export default class Param {
 
     // true - forward
     // false - backward
-    this.direction = value >= 0.5;
+    this.direction = value < 1;
 
     this._value = value;
     this.value.addListener(({ value }) => {
