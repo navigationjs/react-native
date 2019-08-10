@@ -1,4 +1,5 @@
 import { Animated } from 'react-native';
+import { link } from '../Wrap';
 
 export default class Param {
   constructor(value = 0, defaultDuration = 0) {
@@ -19,10 +20,14 @@ export default class Param {
 
   to = (value, duration = this.defaultDuration) => {
     return new Promise(resolve => {
+      link.wrap && link.wrap.disable();
       Animated.timing(this.value, {
         toValue: value,
         duration,
-      }).start(() => resolve());
+      }).start(() => {
+        link.wrap && link.wrap.enable();
+        resolve();
+      });
     });
   };
 }
