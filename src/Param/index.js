@@ -29,7 +29,7 @@ export default class Param {
           link.wrap && link.wrap.enable();
           resolve();
         });
-      })
+      });
     });
   };
 }
