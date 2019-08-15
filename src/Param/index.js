@@ -2,8 +2,8 @@ import { Animated } from 'react-native';
 import { link } from '../Wrap';
 
 export default class Param {
-  constructor(value = 0, defaultDuration = 0) {
-    this.defaultDuration = defaultDuration;
+  constructor(value = 0, duration = 0) {
+    this.duration = duration;
     this.value = new Animated.Value(value);
 
     // true - forward
@@ -18,7 +18,7 @@ export default class Param {
     });
   }
 
-  to = (value, duration = this.defaultDuration) => {
+  to = (value, duration = this.duration) => {
     link.wrap && link.wrap.disable();
     return new Promise(resolve => {
       this.value.stopAnimation(() => {

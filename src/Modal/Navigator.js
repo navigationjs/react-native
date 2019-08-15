@@ -1,17 +1,25 @@
 export default class Navigator {
-  constructor(scenes = {}) {
-    this.scenes = scenes;
+  constructor(name) {
+    this.name = name;
+    this.scenes = {};
+    this.chain = [];
   }
 
-  show = name => {
+  addScenes = (...scenes) => {
+    scenes.forEach(it => this.scenes[it.name] = it)
+  }
+
+  go = (name, duration) => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-    return scene.show();
+    this.chain.push(name)
+    return scene.show(duration);
   };
 
-  hide = name => {
+  back = (duration) => {
+    const name = this.chain.pop();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-    return scene.hide();
+    return scene.hide(duration);
   };
 }

@@ -1,5 +1,10 @@
 class Navigation {
-  constructor(navigators = {}) {
-    this.navigators = navigators;
+  constructor() {
+    this.navigators = {};
+    this.chain = [];
+  }
+
+  addNavigators = (...navigators) => {
+    navigators.forEach(it => this.navigators[it.name] = it)
   }
 }
