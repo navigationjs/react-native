@@ -6,6 +6,6 @@ export default class Scene {
     this.active = new Param(0, 300);
   }
 
-  show = (duration) => this.active.to(1, duration);
-  hide = (duration) => this.active.to(0, duration);
+  show = duration => this.active.to(1, duration);
+  hide = duration => this.active.to(0, duration);
 }

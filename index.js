@@ -5,5 +5,4 @@ import Modal from './src/Modal';
 import Param from './src/Param';
 import Wrap from './src/Wrap';
 
-export { Stack, Tab, Modal, Param, Wrap };
-export default Navigation;
+export { Navigation, Stack, Tab, Modal, Param, Wrap };

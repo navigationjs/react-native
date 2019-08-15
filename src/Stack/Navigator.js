@@ -6,16 +6,16 @@ export default class Navigator {
   }
 
   addScenes = (...scenes) => {
-    scenes.forEach(it => this.scenes[it.name] = it)
-  }
+    scenes.forEach(it => (this.scenes[it.name] = it));
+  };
 
   go = (name, duration) => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
 
     const promises = this.chain.map(sceneName => {
-      const scene = this.scenes[sceneName]
-      return scene.backward(duration)
+      const scene = this.scenes[sceneName];
+      return scene.backward(duration);
     });
 
     this.chain.push(name);
@@ -24,17 +24,17 @@ export default class Navigator {
     return Promise.all(promises);
   };
 
-  back = (duration) => {
+  back = duration => {
     const promises = [];
 
     const name = this.chain.pop();
     const scene = this.scenes[name];
-    promises.push(scene.hide(duration))
+    promises.push(scene.hide(duration));
 
     this.chain.forEach(sceneName => {
-      const scene = this.scenes[sceneName]
-      promises.push(scene.forward(duration))
-    })
+      const scene = this.scenes[sceneName];
+      promises.push(scene.forward(duration));
+    });
 
     return Promise.all(promises);
   };

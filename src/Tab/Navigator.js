@@ -5,8 +5,8 @@ export default class Navigator {
   }
 
   addScenes = (...scenes) => {
-    scenes.forEach(it => this.scenes[it.name] = it)
-  }
+    scenes.forEach(it => (this.scenes[it.name] = it));
+  };
 
   go = (name, duration) => {
     const scene = this.scenes[name];

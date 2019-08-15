@@ -6,17 +6,17 @@ export default class Navigator {
   }
 
   addScenes = (...scenes) => {
-    scenes.forEach(it => this.scenes[it.name] = it)
-  }
+    scenes.forEach(it => (this.scenes[it.name] = it));
+  };
 
   go = (name, duration) => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-    this.chain.push(name)
+    this.chain.push(name);
     return scene.show(duration);
   };
 
-  back = (duration) => {
+  back = duration => {
     const name = this.chain.pop();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
