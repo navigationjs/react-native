@@ -1,8 +1,10 @@
 import Param from '../Param';
 
 export default class Scene {
-  active = new Param(0, 300);
-  depth = new Param(0, 300);
+  constructor({ active = new Param(0, 300), depth = new Param(0, 300) } = {}) {
+    this.active = active;
+    this.depth = depth;
+  }
   show = () => Promise.all(this.depth.to(0), this.active.to(1));
   hide = () => Promise.all(this.depth.to(0), this.active.to(0));
   backward = () => this.depth.to(this.depth._value + 1);

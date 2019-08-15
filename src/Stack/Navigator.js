@@ -3,7 +3,11 @@ export default class Navigator {
     this.scenes = scenes;
   }
 
-  push = scene => {
+  push = name => {
+    const scene = this.scenes[name];
+
+    if (!scene) return Promise.reject();
+
     const promises = [];
 
     Object.values(this.scenes).forEach(it => {

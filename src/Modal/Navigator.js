@@ -3,11 +3,15 @@ export default class Navigator {
     this.scenes = scenes;
   }
 
-  to = name => {
+  show = name => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-    const promises = Object.values(this.scenes).map(it => it.hide());
-    promises.push(scene.show());
-    return Promise.all(promises);
+    return scene.show();
+  };
+
+  hide = name => {
+    const scene = this.scenes[name];
+    if (!scene) return Promise.reject();
+    return scene.hide();
   };
 }

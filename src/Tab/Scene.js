@@ -1,8 +1,9 @@
-import { Animated } from 'react-native';
 import Param from '../Param';
 
 export default class Scene {
-  active = new Param(0);
+  constructor({ active = new Param(0) } = {}) {
+    this.active = active;
+  }
   show = () => this.active.to(1);
   hide = () => this.active.to(0);
 }
