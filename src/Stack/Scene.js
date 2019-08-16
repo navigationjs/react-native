@@ -3,8 +3,8 @@ import Param from '../Param';
 export default class Scene {
   constructor(name) {
     this.name = name;
-    this.active = new Param(0, 300);
-    this.depth = new Param(0, 300);
+    this.active = new Param();
+    this.depth = new Param();
   }
   show = duration =>
     Promise.all(this.depth.to(0, duration), this.active.to(1, duration));

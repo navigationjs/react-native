@@ -1,8 +1,10 @@
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import { link } from '../Wrap';
 
+const defaultDuration = 300;
+
 export default class Param {
-  constructor(value = 0, duration = 0) {
+  constructor(value = 0, duration = defaultDuration) {
     this.duration = duration;
     this.value = new Animated.Value(value);
 

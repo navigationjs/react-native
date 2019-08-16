@@ -13,6 +13,9 @@ export default class Navigator {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
 
+    const alreadyInChain = this.chain.includes(name);
+    if (alreadyInChain) return Promise.resolve();
+
     const promises = this.chain.map(sceneName => {
       const scene = this.scenes[sceneName];
       return scene.backward(duration);
@@ -28,6 +31,7 @@ export default class Navigator {
     const promises = [];
 
     const name = this.chain.pop();
+    if (!name) return Promise.resolve();
     const scene = this.scenes[name];
     promises.push(scene.hide(duration));
 
