@@ -4,20 +4,18 @@ import { Animated, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 
 export default class Wrap extends Component {
-  state = { direction: this.props.scene.active.direction };
+  state = { loading: this.props.scene.active.loading };
 
   componentDidMount() {
     const {
       scene: { active },
     } = this.props;
-    active.value.addListener(() =>
-      this.setState({ direction: active.direction })
-    );
+    active.value.addListener(() => this.setState({ loading: active.loading }));
   }
 
   render() {
     const { scene, children, style, ...props } = this.props;
-    const { direction } = this.state;
+    const { loading } = this.state;
 
     return (
       <Animated.View
@@ -48,7 +46,7 @@ export default class Wrap extends Component {
           style,
         ]}
       >
-        {typeof children === 'function' ? children({ direction }) : children}
+        {typeof children === 'function' ? children({ loading }) : children}
       </Animated.View>
     );
   }

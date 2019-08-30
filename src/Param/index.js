@@ -10,12 +10,12 @@ export default class Param {
 
     // true - forward
     // false - backward
-    this.direction = value < 1;
+    this.loading = value < 1;
 
     this._value = value;
     this.value.addListener(({ value }) => {
-      if (value === 1) this.direction = false;
-      else if (value === 0) this.direction = true;
+      if (value === 1) this.loading = false;
+      else if (value === 0) this.loading = true;
       this._value = value;
     });
   }
