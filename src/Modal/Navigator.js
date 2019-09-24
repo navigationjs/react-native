@@ -27,4 +27,9 @@ export default class Navigator {
     if (!scene) return Promise.reject();
     return scene.hide(duration);
   };
+
+  reset = () => {
+    this.chain = [];
+    return Promise.all(Object.keys(this.scenes).map(key => this.scenes[key].hide(0)))
+  }
 }
