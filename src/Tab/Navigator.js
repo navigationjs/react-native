@@ -15,4 +15,7 @@ export default class Navigator {
     promises.push(scene.show(duration));
     return Promise.all(promises);
   };
+
+  reset = () =>
+    Promise.all(Object.keys(this.scenes).map(key => this.scenes[key].hide(0)));
 }

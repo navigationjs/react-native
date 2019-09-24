@@ -30,6 +30,8 @@ export default class Navigator {
 
   reset = () => {
     this.chain = [];
-    return Promise.all(Object.keys(this.scenes).map(key => this.scenes[key].hide(0)))
-  }
+    return Promise.all(
+      Object.keys(this.scenes).map(key => this.scenes[key].hide(0))
+    );
+  };
 }

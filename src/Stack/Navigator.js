@@ -42,4 +42,11 @@ export default class Navigator {
 
     return Promise.all(promises);
   };
+
+  reset = () => {
+    this.chain = [];
+    return Promise.all(
+      Object.keys(this.scenes).map(key => this.scenes[key].hide(0))
+    );
+  };
 }
