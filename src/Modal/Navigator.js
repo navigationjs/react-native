@@ -1,5 +1,3 @@
-import navigation from '../Navigation';
-
 export default class Navigator {
   constructor(name) {
     this.name = name;
@@ -22,23 +20,17 @@ export default class Navigator {
     return scene.show(duration);
   };
 
+  canBack = () => this.chain.length > 0;
+
   back = async duration => {
+    if (!this.canBack()) return Promise.resolve();
     const name = this.chain[this.chain.length - 1];
     if (!name) return Promise.resolve();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-
-    for (let index = scene.navigators.length - 1; index >= 0; index--) {
-      const navigator = navigation.navigators[scene.navigators[index]];
-      if (navigator.inTheBeginning()) continue;
-      return navigator.back();
-    }
-
     this.chain.pop();
     return scene.hide(duration);
   };
-
-  inTheBeginning = () => this.chain.length === 0;
 
   reset = () => {
     this.chain = [];

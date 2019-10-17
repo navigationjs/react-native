@@ -25,19 +25,13 @@ export default class Navigator {
     return Promise.all(promises);
   };
 
-  back = async duration => {
-    if (this.chain.length <= 1) return Promise.resolve();
+  canBack = () => this.chain.length > 1;
 
+  back = async duration => {
+    if (!this.canBack()) return Promise.resolve();
     const name = this.chain[this.chain.length - 1];
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-
-    for (let index = scene.navigators.length - 1; index >= 0; index--) {
-      const navigator = navigation.navigators[scene.navigators[index]];
-      if (navigator.inTheBeginning()) continue;
-      return navigator.back();
-    }
-
     const promises = [];
     this.chain.pop();
     promises.push(scene.hide(duration));
@@ -47,8 +41,6 @@ export default class Navigator {
     promises.push(newScene.show(duration));
     return Promise.all(promises);
   };
-
-  inTheBeginning = () => this.chain.length <= 1;
 
   reset = () =>
     Promise.all(Object.keys(this.scenes).map(key => this.scenes[key].hide(0)));

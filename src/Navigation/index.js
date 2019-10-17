@@ -4,6 +4,10 @@ class Navigation {
     this.chain = [];
   }
 
+  toKey = (navigatorName, sceneName) =>
+    JSON.stringify([navigatorName, sceneName]);
+  fromKey = key => JSON.parse(key);
+
   addNavigators = (...navigators) => {
     navigators.forEach(it => (this.navigators[it.name] = it));
   };
@@ -23,7 +27,7 @@ class Navigation {
     if (!name) return Promise.resolve();
     const navigator = this.navigators[name];
     await navigator.back(duration);
-    if (navigator.inTheBeginning()) this.chain.pop();
+    if (navigator.canBack()) this.chain.pop();
   };
 
   reset = () => {

@@ -5,11 +5,7 @@ export default class Scene {
     this.name = name;
     this.active = new Param();
     this.depth = new Param();
-    this.navigators = [];
   }
-  addNavigators = (...navigators) => {
-    navigators.forEach(it => this.navigators.push(it.name));
-  };
   show = duration =>
     Promise.all(this.depth.to(0, duration), this.active.to(1, duration));
   hide = duration =>
