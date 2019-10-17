@@ -1,3 +1,5 @@
+import navigation from '../Navigation';
+
 export default class Navigator {
   constructor(name) {
     this.name = name;
@@ -27,12 +29,22 @@ export default class Navigator {
     return Promise.all(promises);
   };
 
-  back = duration => {
+  back = async duration => {
+    if (this.chain.length <= 1) return Promise.resolve();
+
     const promises = [];
 
-    const name = this.chain.pop();
-    if (!name) return Promise.resolve();
+    const name = this.chain[this.chain.length - 1];
     const scene = this.scenes[name];
+    if (!scene) return Promise.reject();
+
+    for (let index = scene.navigators.length - 1; index >= 0; index--) {
+      const navigator = navigation.navigators[scene.navigators[index]];
+      if (navigator.chain.length === 0) continue;
+      return navigator.back();
+    }
+
+    this.chain.pop();
     promises.push(scene.hide(duration));
 
     this.chain.forEach(sceneName => {
@@ -42,6 +54,8 @@ export default class Navigator {
 
     return Promise.all(promises);
   };
+
+  inTheBeginning = () => this.chain.length <= 1;
 
   reset = () => {
     this.chain = [];

@@ -1,4 +1,4 @@
-export default class Navigation {
+class Navigation {
   constructor() {
     this.navigators = {};
     this.chain = [];
@@ -12,17 +12,18 @@ export default class Navigation {
     const navigator = this.navigators[name];
     if (!navigator) return Promise.reject();
 
-    this.chain = this.chain.filter(it => it === name);
+    this.chain = this.chain.filter(it => it !== name);
     this.chain.push(name);
 
     return navigator.go(sceneName, duration);
   };
 
-  back = duration => {
-    const name = this.chain.pop();
+  back = async duration => {
+    const name = this.chain[this.chain.length - 1];
     if (!name) return Promise.resolve();
     const navigator = this.navigators[name];
-    return navigator.back(duration);
+    await navigator.back(duration);
+    if (navigator.inTheBeginning()) this.chain.pop();
   };
 
   reset = () => {
@@ -32,3 +33,5 @@ export default class Navigation {
     );
   };
 }
+
+export default new Navigation();
