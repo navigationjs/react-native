@@ -25,6 +25,7 @@ export default class Wrap extends Component {
               position: 'absolute',
               height: '100%',
               width: '100%',
+              overflow: 'hidden',
               transform: [
                 {
                   translateY: scene.active.value.interpolate({
@@ -48,6 +49,7 @@ export default class Wrap extends Component {
               width: '100%',
               height: '100%',
               backgroundColor: 'white',
+              overflow: 'hidden',
             },
             {
               transform: [
