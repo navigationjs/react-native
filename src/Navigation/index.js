@@ -26,11 +26,8 @@ class Navigation {
     const name = this.chain[this.chain.length - 1];
     if (!name) return Promise.resolve();
     const navigator = this.navigators[name];
-    if (!navigator.canBack()) {
-      this.chain.pop();
-      return this.back(duration);
-    }
     await navigator.back(duration);
+    if (!navigator.canBack()) this.chain.pop();
   };
 
   reset = () => {
