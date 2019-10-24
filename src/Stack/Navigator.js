@@ -2,7 +2,7 @@ export default class Navigator {
   constructor(name) {
     this.name = name;
     this.scenes = {};
-    this.chain = [];
+    this.history = [];
   }
 
   addScenes = (...scenes) => {
@@ -13,35 +13,35 @@ export default class Navigator {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
 
-    const alreadyInChain = this.chain.includes(name);
-    if (alreadyInChain) return Promise.resolve();
+    const alreadyInHistory = this.history.includes(name);
+    if (alreadyInHistory) return Promise.resolve();
 
-    const promises = this.chain.map(sceneName => {
+    const promises = this.history.map(sceneName => {
       const scene = this.scenes[sceneName];
       return scene.backward(duration);
     });
 
-    this.chain.push(name);
+    this.history.push(name);
     promises.push(scene.show(duration));
 
     return Promise.all(promises);
   };
 
-  canBack = () => this.chain.length > 1;
+  canBack = () => this.history.length > 1;
 
   back = async duration => {
     if (!this.canBack()) return Promise.resolve();
 
     const promises = [];
 
-    const name = this.chain[this.chain.length - 1];
+    const name = this.history[this.history.length - 1];
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
 
-    this.chain.pop();
+    this.history.pop();
     promises.push(scene.hide(duration));
 
-    this.chain.forEach(sceneName => {
+    this.history.forEach(sceneName => {
       const scene = this.scenes[sceneName];
       promises.push(scene.forward(duration));
     });
@@ -50,7 +50,7 @@ export default class Navigator {
   };
 
   reset = () => {
-    this.chain = [];
+    this.history = [];
     return Promise.all(
       Object.keys(this.scenes).map(key => this.scenes[key].hide(0))
     );

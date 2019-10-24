@@ -21,11 +21,11 @@ export default class Back extends Component {
   }
 
   handleBackPress = () => {
-    const navigatorName = navigation.chain[navigation.chain.length - 1];
+    const navigatorName = navigation.history[navigation.history.length - 1];
     if (!navigatorName) return true;
     const navigator = navigation.navigators[navigatorName];
     if (!navigator) return true;
-    const sceneName = navigator.chain[navigator.chain.length - 1];
+    const sceneName = navigator.history[navigator.history.length - 1];
     if (!sceneName) return true;
     const scene = navigator.scenes[sceneName];
     if (!scene) return true;

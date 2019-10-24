@@ -1,7 +1,7 @@
 class Navigation {
   constructor() {
     this.navigators = {};
-    this.chain = [];
+    this.history = [];
   }
 
   toKey = (navigatorName, sceneName) =>
@@ -16,22 +16,22 @@ class Navigation {
     const navigator = this.navigators[name];
     if (!navigator) return Promise.reject();
 
-    this.chain = this.chain.filter(it => it !== name);
-    this.chain.push(name);
+    this.history = this.history.filter(it => it !== name);
+    this.history.push(name);
 
     return navigator.go(sceneName, duration);
   };
 
   back = async duration => {
-    const name = this.chain[this.chain.length - 1];
+    const name = this.history[this.history.length - 1];
     if (!name) return Promise.resolve();
     const navigator = this.navigators[name];
     await navigator.back(duration);
-    if (!navigator.canBack()) this.chain.pop();
+    if (!navigator.canBack()) this.history.pop();
   };
 
   reset = () => {
-    this.chain = [];
+    this.history = [];
     return Promise.all(
       Object.keys(this.navigators).map(name => this.navigators[name].reset())
     );
