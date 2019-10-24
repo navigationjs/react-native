@@ -1,4 +1,4 @@
-import { Animated, Easing } from 'react-native';
+import { Animated } from 'react-native';
 import { link } from '../Wrap';
 
 const defaultDuration = 300;

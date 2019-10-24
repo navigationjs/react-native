@@ -1,5 +1,3 @@
-import navigation from '../Navigation';
-
 export default class Navigator {
   constructor(name) {
     this.name = name;
