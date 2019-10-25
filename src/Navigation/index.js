@@ -4,10 +4,6 @@ class Navigation {
     this.history = [];
   }
 
-  toKey = (navigatorName, sceneName) =>
-    JSON.stringify([navigatorName, sceneName]);
-  fromKey = key => JSON.parse(key);
-
   addNavigators = (...navigators) => {
     navigators.forEach(it => (this.navigators[it.name] = it));
   };
@@ -35,6 +31,18 @@ class Navigation {
     return Promise.all(
       Object.keys(this.navigators).map(name => this.navigators[name].reset())
     );
+  };
+
+  current = () => {
+    const navigatorName = this.history[this.history.length - 1];
+    if (!navigatorName) return;
+    const navigator = this.navigators[navigatorName];
+    if (!navigator) return;
+    const sceneName = navigator.history[navigator.history.length - 1];
+    if (!sceneName) return;
+    const scene = navigator.scenes[sceneName];
+    if (!scene) return;
+    return [navigatorName, sceneName];
   };
 }
 

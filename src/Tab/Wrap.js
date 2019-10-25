@@ -1,8 +1,23 @@
 import React from 'react';
 import { Animated, Dimensions } from 'react-native';
+import navigation from '../Navigation';
 
-export default function Wrap({ scene, children, style, ...props }) {
+export default function Wrap({
+  navigator: navigatorName,
+  scene: sceneName,
+  children,
+  style,
+  ...props
+}) {
   const { height } = Dimensions.get('window');
+
+  const navigator = navigation.navigators[navigatorName];
+  const scene = navigator.scenes[sceneName];
+
+  const pass = {
+    navigator: navigatorName,
+    scene: sceneName,
+  };
 
   return (
     <Animated.View
@@ -28,7 +43,7 @@ export default function Wrap({ scene, children, style, ...props }) {
         style,
       ]}
     >
-      {children}
+      {typeof children === 'function' ? children(pass) : children}
     </Animated.View>
   );
 }

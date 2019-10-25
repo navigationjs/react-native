@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
 import { Animated, Dimensions } from 'react-native';
+import navigation from '../Navigation';
 
 const { height } = Dimensions.get('window');
 
 export default class Wrap extends Component {
-  state = { loading: this.props.scene.active.loading };
+  constructor(props) {
+    super(props);
+
+    const { navigator: navigatorName, scene: sceneName } = props;
+
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+
+    this.state = { loading: scene.active.loading };
+  }
 
   componentDidMount() {
-    const {
-      scene: { active },
-    } = this.props;
-    active.value.addListener(() => this.setState({ loading: active.loading }));
+    const { navigator: navigatorName, scene: sceneName } = this.props;
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+    scene.active.value.addListener(() =>
+      this.setState({ loading: scene.active.loading })
+    );
   }
 
   render() {
-    const { scene, children, overlay, style, ...props } = this.props;
+    const {
+      navigator: navigatorName,
+      scene: sceneName,
+      children,
+      overlay,
+      style,
+      ...props
+    } = this.props;
     const { loading } = this.state;
+
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+
+    const pass = {
+      loading,
+      navigator: navigatorName,
+      scene: sceneName,
+    };
 
     return (
       <>
@@ -64,7 +92,7 @@ export default class Wrap extends Component {
             style,
           ]}
         >
-          {typeof children === 'function' ? children({ loading }) : children}
+          {typeof children === 'function' ? children(pass) : children}
         </Animated.View>
       </>
     );
