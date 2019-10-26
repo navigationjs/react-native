@@ -30,7 +30,8 @@ export class AndroidBack extends Component {
     const [navigator, scene] = current;
     const key = toKey(navigator, scene);
     if (!Back.handlers[key]) return true;
-    return Back.handlers[key]();
+    Back.handlers[key]();
+    return true;
   };
 
   render() {
