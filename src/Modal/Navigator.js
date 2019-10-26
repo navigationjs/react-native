@@ -21,9 +21,11 @@ export default class Navigator {
 
   canBack = () => this.history.length > 0;
 
+  current = () => this.history[this.history.length - 1];
+
   back = async duration => {
     if (!this.canBack()) return Promise.resolve();
-    const name = this.history[this.history.length - 1];
+    const name = this.current();
     if (!name) return Promise.resolve();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();

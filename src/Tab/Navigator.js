@@ -25,15 +25,17 @@ export default class Navigator {
 
   canBack = () => this.history.length > 1;
 
+  current = () => this.history[this.history.length - 1];
+
   back = async duration => {
     if (!this.canBack()) return Promise.resolve();
-    const name = this.history[this.history.length - 1];
+    const name = this.current();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
     const promises = [];
     this.history.pop();
     promises.push(scene.hide(duration));
-    const newSceneName = this.history[this.history.length - 1];
+    const newSceneName = this.current();
     const newScene = this.scenes[newSceneName];
     if (!newScene) return Promise.reject();
     promises.push(newScene.show(duration));

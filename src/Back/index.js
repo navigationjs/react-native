@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { BackHandler } from 'react-native';
+import { toKey } from '../helpers';
 import navigation from '../Navigation';
-
-const toKey = (navigator, scene) => JSON.stringify([navigator, scene]);
 
 const Back = (handler, source) => {
   const { navigator, scene } = source;
@@ -27,9 +26,10 @@ export class AndroidBack extends Component {
   handleBackPress = () => {
     const current = navigation.current();
     if (!current) return true;
-    const [navigator, scene] = current;
+    const [navigator, scene, chain] = current;
     const key = toKey(navigator, scene);
     if (!Back.handlers[key]) return true;
+    navigation.cd(chain[chain.length - 1]);
     Back.handlers[key]();
     return true;
   };
