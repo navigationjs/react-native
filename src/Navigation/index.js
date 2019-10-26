@@ -38,10 +38,11 @@ class Navigation {
     const name = this.history[this.history.length - 1];
     if (!name) return Promise.resolve();
     const navigator = this.navigators[name];
-    await navigator.back(duration);
+    const promise = navigator.back(duration);
     if (navigator.history.length === 0) {
       this.history.pop();
     }
+    return promise;
   };
 
   reset = () => {
