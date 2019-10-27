@@ -34,7 +34,7 @@ describe('Param', () => {
     expect(param._value).toBe(0.5)
     await param.to(1)
     expect(param._value).toBe(1)
-  })  
+  })
 
   it('should change loading when value hits 1 or 0', async () => {
     const param = new Param(0);
