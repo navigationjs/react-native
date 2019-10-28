@@ -27,12 +27,10 @@ export default class Navigator {
     return Promise.all(promises);
   };
 
-  canBack = () => this.history.length > 1;
-
   current = () => this.history[this.history.length - 1];
 
   back = async duration => {
-    if (!this.canBack()) return Promise.resolve();
+    if (this.history.length === 0) return Promise.resolve();
 
     const promises = [];
 

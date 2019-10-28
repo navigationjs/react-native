@@ -1,48 +1,61 @@
-import { toKey, fromKey } from '../helpers';
+import Focus from '../Focus';
+import { toKey } from '../helpers';
 
-class Navigation {
-  static ROOT = '/';
-
+export class Navigation {
   constructor() {
     this.navigators = {};
-    this.graph = {
-      [Navigation.ROOT]: [],
-    };
-    this.history = this.graph[Navigation.ROOT];
+    this.history = [];
   }
 
   addNavigators = (...navigators) =>
     navigators.forEach(it => (this.navigators[it.name] = it));
 
-  cd = (navigatorNameOrKey, sceneName) => {
-    const key =
-      navigatorNameOrKey && sceneName
-        ? toKey(navigatorNameOrKey, sceneName)
-        : navigatorNameOrKey;
-    if (this.graph[key] === undefined) this.graph[key] = [];
-    this.history = this.graph[key];
+  go = async (navigatorName, sceneName, duration) => {
+    const prevKey = this.currentKey();
+
+    const navigator = this.navigators[navigatorName];
+    if (!navigator) return Promise.reject();
+
+    this.push(navigatorName);
+
+    if (sceneName) await navigator.go(sceneName, duration);
+
+    const nextKey = this.currentKey();
+
+    if (prevKey !== nextKey) {
+      if (Focus.handlers[nextKey])
+        await Focus.handlers[nextKey](prevKey, nextKey);
+    }
+
+    return Promise.resolve();
   };
 
-  go = (navigatorName, sceneName, duration) => {
+  push = navigatorName => {
     const navigator = this.navigators[navigatorName];
     if (!navigator) return Promise.reject();
 
     const index = this.history.findIndex(it => it === navigatorName);
     if (index >= 0) this.history.splice(index, 1);
     this.history.push(navigatorName);
-
-    return navigator.go(sceneName, duration);
   };
 
-  back = async duration => {
-    const name = this.history[this.history.length - 1];
-    if (!name) return Promise.resolve();
-    const navigator = this.navigators[name];
-    const promise = navigator.back(duration);
-    if (navigator.history.length === 0) {
-      this.history.pop();
+  back = async (navigatorName, duration) => {
+    const navigator = this.navigators[navigatorName || this.current()];
+    if (!navigator) return Promise.reject();
+
+    const prevKey = this.currentKey();
+
+    await navigator.back(duration);
+    if (navigator.history.length === 0) this.history.pop();
+
+    const nextKey = this.currentKey();
+
+    if (prevKey !== nextKey) {
+      if (Focus.handlers[nextKey])
+        await Focus.handlers[nextKey](prevKey, nextKey);
     }
-    return promise;
+
+    return Promise.resolve();
   };
 
   reset = () => {
@@ -53,22 +66,14 @@ class Navigation {
     );
   };
 
-  current = (key = Navigation.ROOT, chain = []) => {
-    const history = this.graph[key] || [];
-    if (history.length === 0) {
-      if (key === Navigation.ROOT) return;
-      return [...fromKey(key), chain];
-    }
-    const navigatorName = history[history.length - 1];
-    if (!navigatorName) return;
-    const navigator = this.navigators[navigatorName];
-    if (!navigator) return;
-    const sceneName = navigator.current();
-    if (!sceneName) return;
-    const scene = navigator.scenes[sceneName];
-    if (!scene) return;
-    const nextKey = toKey(navigatorName, sceneName);
-    return this.current(nextKey, [...chain, key]);
+  current = () => this.history[this.history.length - 1];
+
+  currentKey = () => {
+    const currentNavigator = this.current();
+    if (!currentNavigator) return;
+    const currentScene = this.navigators[currentNavigator].current();
+    if (!currentScene) return;
+    return toKey(currentNavigator, currentScene);
   };
 }
 

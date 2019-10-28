@@ -13,7 +13,8 @@ export default class Navigator {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
 
-    this.history = this.history.filter(it => it !== name);
+    const index = this.history.findIndex(it => it === name);
+    if (index >= 0) this.history.splice(index, 1);
     this.history.push(name);
 
     const promises = [];
@@ -23,12 +24,10 @@ export default class Navigator {
     return Promise.all(promises);
   };
 
-  canBack = () => this.history.length > 1;
-
   current = () => this.history[this.history.length - 1];
 
   back = async duration => {
-    if (!this.canBack()) return Promise.resolve();
+    if (this.history.length === 0) return Promise.resolve();
     const name = this.current();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();

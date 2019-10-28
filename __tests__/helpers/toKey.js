@@ -7,7 +7,7 @@ describe('helpers', () => {
 
     it('should stringify navigator and scene names', () => {
       const key = toKey(navigatorName, sceneName);
-      expect(key).toBe('["login","pin"]');
+      expect(key).toBe('login/pin');
     });
   });
 });
