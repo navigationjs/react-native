@@ -57,8 +57,7 @@ export class Navigation {
   };
 
   reset = () => {
-    this.graph = { [Navigation.ROOT]: [] };
-    this.history = this.graph[Navigation.ROOT];
+    this.history = [];
     return Promise.all(
       Object.keys(this.navigators).map(name => this.navigators[name].reset())
     );
