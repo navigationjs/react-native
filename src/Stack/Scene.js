@@ -1,10 +1,10 @@
-import Param from '../Param';
+import Value from '../Value';
 
 export default class Scene {
   constructor(name) {
     this.name = name;
-    this.active = new Param();
-    this.depth = new Param();
+    this.active = new Value();
+    this.depth = new Value();
   }
   show = duration =>
     Promise.all(this.depth.to(0, duration), this.active.to(1, duration));

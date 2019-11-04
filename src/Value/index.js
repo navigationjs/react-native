@@ -3,7 +3,7 @@ import { link } from '../Wrap';
 
 const defaultDuration = 300;
 
-export default class Param {
+export default class Value {
   constructor(value = 0, duration = defaultDuration) {
     this.duration = duration;
     this.value = new Animated.Value(value);

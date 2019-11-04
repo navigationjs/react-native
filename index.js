@@ -5,7 +5,7 @@ import AndroidBack from './src/AndroidBack';
 import Stack from './src/Stack';
 import Tab from './src/Tab';
 import Modal from './src/Modal';
-import Param from './src/Param';
+import Value from './src/Value';
 import Wrap from './src/Wrap';
 import * as helpers from './src/helpers';
 
@@ -17,7 +17,7 @@ export {
   Stack,
   Tab,
   Modal,
-  Param,
+  Value,
   Wrap,
   helpers,
 };

@@ -1,51 +1,51 @@
 import { Animated } from 'react-native';
-import Param from '../../src/Param';
+import Value from '../../src/Value';
 
-describe('Param', () => {
+describe('Value', () => {
   it('should has a default value', () => {
-    const param = new Param();
-    expect(param._value).toBe(0);
+    const value = new Value();
+    expect(value._value).toBe(0);
   });
 
   it('should has a animated value', () => {
-    const param = new Param(0.5);
-    expect(param.value instanceof Animated.Value).toBeTruthy();
-    expect(param.value._value).toBe(0.5);
+    const value = new Value(0.5);
+    expect(value.value instanceof Animated.Value).toBeTruthy();
+    expect(value.value._value).toBe(0.5);
   });
 
   it('should has a default duration', () => {
-    const param = new Param();
-    expect(param.duration).toBe(300);
+    const value = new Value();
+    expect(value.duration).toBe(300);
   });
 
   it('should has loading depending on value', () => {
-    const param1 = new Param(0);
-    expect(param1.loading).toBeTruthy();
-    const param2 = new Param(0.5);
-    expect(param2.loading).toBeTruthy();
-    const param3 = new Param(1);
-    expect(param3.loading).toBeFalsy();
+    const value1 = new Value(0);
+    expect(value1.loading).toBeTruthy();
+    const value2 = new Value(0.5);
+    expect(value2.loading).toBeTruthy();
+    const value3 = new Value(1);
+    expect(value3.loading).toBeFalsy();
   });
 
   it('should change values on `to` method', async () => {
-    const param = new Param(0);
-    expect(param._value).toBe(0);
-    await param.to(0.5);
-    expect(param._value).toBe(0.5);
-    await param.to(1);
-    expect(param._value).toBe(1);
+    const value = new Value(0);
+    expect(value._value).toBe(0);
+    await value.to(0.5);
+    expect(value._value).toBe(0.5);
+    await value.to(1);
+    expect(value._value).toBe(1);
   });
 
   it('should change loading when value hits 1 or 0', async () => {
-    const param = new Param(0);
-    expect(param.loading).toBeTruthy();
-    await param.to(0.7);
-    expect(param.loading).toBeTruthy();
-    await param.to(1);
-    expect(param.loading).toBeFalsy();
-    await param.to(0.3);
-    expect(param.loading).toBeFalsy();
-    await param.to(0);
-    expect(param.loading).toBeTruthy();
+    const value = new Value(0);
+    expect(value.loading).toBeTruthy();
+    await value.to(0.7);
+    expect(value.loading).toBeTruthy();
+    await value.to(1);
+    expect(value.loading).toBeFalsy();
+    await value.to(0.3);
+    expect(value.loading).toBeFalsy();
+    await value.to(0);
+    expect(value.loading).toBeTruthy();
   });
 });
