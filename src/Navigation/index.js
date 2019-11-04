@@ -1,5 +1,5 @@
 import Focus from '../Focus';
-import { toKey } from '../helpers';
+import { toId } from '../helpers';
 
 export class Navigation {
   constructor() {
@@ -11,7 +11,7 @@ export class Navigation {
     navigators.forEach(it => (this.navigators[it.name] = it));
 
   go = async (navigatorName, sceneName, duration) => {
-    const prevKey = this.currentKey();
+    const prevId = this.currentId();
 
     const navigator = this.navigators[navigatorName];
     if (!navigator) return Promise.reject();
@@ -20,11 +20,10 @@ export class Navigation {
 
     if (sceneName) await navigator.go(sceneName, duration);
 
-    const nextKey = this.currentKey();
+    const nextId = this.currentId();
 
-    if (prevKey !== nextKey) {
-      if (Focus.handlers[nextKey])
-        await Focus.handlers[nextKey](prevKey, nextKey);
+    if (prevId !== nextId) {
+      if (Focus.handlers[nextId]) await Focus.handlers[nextId](prevId, nextId);
     }
 
     return Promise.resolve();
@@ -43,16 +42,15 @@ export class Navigation {
     const navigator = this.navigators[navigatorName || this.current()];
     if (!navigator) return Promise.reject();
 
-    const prevKey = this.currentKey();
+    const prevId = this.currentId();
 
     await navigator.back(duration);
     if (navigator.history.length === 0) this.history.pop();
 
-    const nextKey = this.currentKey();
+    const nextId = this.currentId();
 
-    if (prevKey !== nextKey) {
-      if (Focus.handlers[nextKey])
-        await Focus.handlers[nextKey](prevKey, nextKey);
+    if (prevId !== nextId) {
+      if (Focus.handlers[nextId]) await Focus.handlers[nextId](prevId, nextId);
     }
 
     return Promise.resolve();
@@ -68,12 +66,12 @@ export class Navigation {
 
   current = () => this.history[this.history.length - 1];
 
-  currentKey = () => {
+  currentId = () => {
     const currentNavigator = this.current();
     if (!currentNavigator) return;
     const currentScene = this.navigators[currentNavigator].current();
     if (!currentScene) return;
-    return toKey(currentNavigator, currentScene);
+    return toId(currentNavigator, currentScene);
   };
 }
 

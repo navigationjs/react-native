@@ -1,9 +1,9 @@
-import { toKey } from '../helpers';
+import { toId } from '../helpers';
 import navigation from '../Navigation';
 
 const Back = (handler, source) => {
   const { navigator, scene } = source;
-  Back.handlers[toKey(navigator, scene)] = handler;
+  Back.handlers[toId(navigator, scene)] = handler;
   return handler;
 };
 
@@ -15,9 +15,9 @@ Back.back = () => {
   const navigator = navigation.navigators[navigatorName];
   if (!navigator) return true;
   const sceneName = navigator.current();
-  const key = toKey(navigatorName, sceneName);
-  if (!Back.handlers[key]) return true;
-  Back.handlers[key]();
+  const id = toId(navigatorName, sceneName);
+  if (!Back.handlers[id]) return true;
+  Back.handlers[id]();
   return true;
 };
 

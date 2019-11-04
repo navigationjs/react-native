@@ -1,8 +1,8 @@
-import { toKey } from '../helpers';
+import { toId } from '../helpers';
 
 const Focus = (handler, source) => {
   const { navigator, scene } = source;
-  Focus.handlers[toKey(navigator, scene)] = handler;
+  Focus.handlers[toId(navigator, scene)] = handler;
   return handler;
 };
 

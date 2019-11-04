@@ -1,3 +1,3 @@
 const separator = '/';
-export const toKey = (navigator, scene) => `${navigator}${separator}${scene}`;
-export const fromKey = key => key.split(separator);
+export const toId = (navigator, scene) => `${navigator}${separator}${scene}`;
+export const fromId = id => id.split(separator);
