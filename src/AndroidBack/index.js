@@ -1,20 +1,22 @@
 import { Component } from 'react';
-import { BackHandler } from 'react-native';
-import Back from '../Back';
+import navigation, { Navigation } from '../Navigation';
+import Emitter from '../Navigation/Emitter';
 
 export default class AndroidBack extends Component {
   componentDidMount() {
-    this.backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      this.handleBackPress
+    const { id, onPress } = this.props;
+    navigation.on(
+      `${Navigation.EVENTS.ANDROID_BACK}${Emitter.SEPARATOR}${id}`,
+      onPress
     );
   }
 
   componentWillUnmount() {
-    this.backHandler.remove();
+    const { id } = this.props;
+    navigation.off(
+      `${Navigation.EVENTS.ANDROID_BACK}${Emitter.SEPARATOR}${id}`
+    );
   }
-
-  handleBackPress = () => Back.back();
 
   render() {
     return null;

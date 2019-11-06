@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Animated, Dimensions } from 'react-native';
+import { toId } from '../helpers';
 import navigation from '../Navigation';
 
 const { width } = Dimensions.get('window');
@@ -40,11 +41,8 @@ export default class Wrap extends Component {
     const navigator = navigation.navigators[navigatorName];
     const scene = navigator.scenes[sceneName];
 
-    const pass = {
-      loading,
-      navigator: navigatorName,
-      scene: sceneName,
-    };
+    const id = toId(navigatorName, sceneName);
+    const pass = { loading, id };
 
     return (
       <Animated.View

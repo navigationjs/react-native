@@ -1,17 +1,29 @@
-import Focus from '../Focus';
 import { toId } from '../helpers';
+import Emitter from './Emitter';
 
 export class Navigation {
+  static EVENTS = {
+    BLUR: 'blur',
+    FOCUS: 'focus',
+    ANDROID_BACK: 'android_back',
+  };
+
   constructor() {
     this.navigators = {};
     this.history = [];
+    this.emitter = new Emitter();
+
+    // aliases
+    this.on = this.emitter.on;
+    this.off = this.emitter.off;
+    this.emit = this.emitter.emit;
   }
 
   addNavigators = (...navigators) =>
     navigators.forEach(it => (this.navigators[it.name] = it));
 
   go = async (navigatorName, sceneName, duration) => {
-    const prevId = this.currentId();
+    const prevId = this.id();
 
     const navigator = this.navigators[navigatorName];
     if (!navigator) return Promise.reject();
@@ -20,10 +32,13 @@ export class Navigation {
 
     if (sceneName) await navigator.go(sceneName, duration);
 
-    const nextId = this.currentId();
+    const id = this.id();
 
-    if (prevId !== nextId) {
-      if (Focus.handlers[nextId]) await Focus.handlers[nextId](prevId, nextId);
+    if (prevId !== id) {
+      this.emit(`${Navigation.EVENTS.BLUR}${Emitter.SEPARATOR}${prevId}`, {
+        id: prevId,
+      });
+      this.emit(`${Navigation.EVENTS.FOCUS}${Emitter.SEPARATOR}${id}`, { id });
     }
 
     return Promise.resolve();
@@ -42,15 +57,18 @@ export class Navigation {
     const navigator = this.navigators[navigatorName || this.current()];
     if (!navigator) return Promise.reject();
 
-    const prevId = this.currentId();
+    const prevId = this.id();
 
     await navigator.back(duration);
     if (navigator.history.length === 0) this.history.pop();
 
-    const nextId = this.currentId();
+    const id = this.id();
 
-    if (prevId !== nextId) {
-      if (Focus.handlers[nextId]) await Focus.handlers[nextId](prevId, nextId);
+    if (prevId !== id) {
+      this.emit(`${Navigation.EVENTS.BLUR}${Emitter.SEPARATOR}${prevId}`, {
+        id: prevId,
+      });
+      this.emit(`${Navigation.EVENTS.FOCUS}${Emitter.SEPARATOR}${id}`, { id });
     }
 
     return Promise.resolve();
@@ -65,7 +83,7 @@ export class Navigation {
 
   current = () => this.history[this.history.length - 1];
 
-  currentId = () => {
+  id = () => {
     const currentNavigator = this.current();
     if (!currentNavigator) return;
     const currentScene = this.navigators[currentNavigator].current();
