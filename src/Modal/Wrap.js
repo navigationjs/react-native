@@ -25,6 +25,15 @@ export default class Wrap extends Component {
     );
   }
 
+  componentWillUnmount() {
+    const { navigator: navigatorName, scene: sceneName } = this.props;
+
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+
+    scene.active.value.removeAllListeners();
+  }
+
   render() {
     const {
       navigator: navigatorName,
