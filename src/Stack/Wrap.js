@@ -33,6 +33,7 @@ export default class Wrap extends Component {
     const navigator = navigation.navigators[navigatorName];
     const scene = navigator.scenes[sceneName];
 
+    scene.active.value.stopAnimation();
     scene.active.value.removeAllListeners();
   }
 
