@@ -15,7 +15,7 @@ export default class Emitter {
   off = eventId => {
     const [name, id] = this.parse(eventId);
     if (this.listeners[name] === undefined) return;
-    this.listeners = this.listeners.filter(
+    this.listeners = this.listeners[name].filter(
       listener => listener.id === id || listener.id === Emitter.ANY
     );
   };

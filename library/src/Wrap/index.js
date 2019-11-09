@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
-import navigation from '../Navigation';
+import navigation, { Navigation } from '../Navigation';
 import Emitter from '../Navigation/Emitter';
 
 export const link = { wrap: null };
@@ -22,7 +22,7 @@ export default class Wrap extends Component {
   }
 
   handleBackPress = () => {
-    const id = navigaton.id();
+    const id = navigation.id();
     if (id) {
       navigation.emit(
         `${Navigation.EVENTS.ANDROID_BACK}${Emitter.SEPARATOR}${id}`,
