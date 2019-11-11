@@ -3,8 +3,6 @@ import { Animated, Dimensions } from 'react-native';
 import { toId } from '../helpers';
 import navigation from '../Navigation';
 
-const { height } = Dimensions.get('window');
-
 export default class Wrap extends Component {
   constructor(props) {
     super(props);
@@ -26,6 +24,15 @@ export default class Wrap extends Component {
     );
   }
 
+  componentWillUnmount() {
+    const { navigator: navigatorName, scene: sceneName } = this.props;
+
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+
+    scene.active.value.removeAllListeners();
+  }
+
   render() {
     const {
       navigator: navigatorName,
@@ -42,6 +49,8 @@ export default class Wrap extends Component {
 
     const id = toId(navigatorName, sceneName);
     const pass = { loading, id };
+
+    const { height } = Dimensions.get('window');
 
     return (
       <>
