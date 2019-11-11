@@ -1,6 +1,6 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {getStatusBarHeight} from 'react-native-iphone-x-helper';
-import config from '../../../config';
+import config from '../../../../config';
 
 export default StyleSheet.create({
   wrap: {

@@ -3,7 +3,7 @@ import {Animated} from 'react-native';
 import Loader from '../../../components/Loader';
 import styles from './styles';
 import config from '../../../config';
-import navigation, {preloader} from '../../../navigation';
+import navigation, {preloader, first, second} from '../../../navigation';
 
 export default class Preloader extends Component {
   async componentDidMount() {
@@ -11,6 +11,8 @@ export default class Preloader extends Component {
 
     // load something
 
+    await first.go('first', 0);
+    await second.go('first', 0);
     await navigation.go('main', 'first', 0);
 
     setTimeout(() => {

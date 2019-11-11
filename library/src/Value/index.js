@@ -8,16 +8,8 @@ export default class Value {
     this.duration = duration;
     this.value = new Animated.Value(value);
 
-    // true - forward
-    // false - backward
-    this.loading = value < 1;
-
     this._value = value;
-    this.value.addListener(({ value }) => {
-      if (value === 1) this.loading = false;
-      else if (value === 0) this.loading = true;
-      this._value = value;
-    });
+    this.value.addListener(({ value }) => (this._value = value));
   }
 
   to = (value, duration = this.duration) => {

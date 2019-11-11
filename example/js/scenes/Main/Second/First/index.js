@@ -1,15 +1,19 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Button} from 'react-native';
 import {AndroidBack} from 'react-native-animated-navigation';
+import navigation, {main} from '../../../../navigation';
 import styles from './styles';
-import navigation, {main} from '../../../navigation';
 
 export default class First extends Component {
-  onBackPress = () => {
+  onBackPress = async () => {
+    await navigation.push('main');
+
     if (main.history.length > 1) {
       navigation.back();
     }
   };
+
+  onGoToSecond = () => navigation.go('second', 'second');
 
   render() {
     const {id} = this.props;
@@ -17,7 +21,8 @@ export default class First extends Component {
     return (
       <View style={styles.wrap}>
         <AndroidBack id={id} onPress={this.onBackPress} />
-        <Text>First scene</Text>
+        <Text>Second/First scene</Text>
+        <Button title={'Go to Second/Second'} onPress={this.onGoToSecond} />
       </View>
     );
   }

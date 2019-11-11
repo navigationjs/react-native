@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Wrap, Tab} from 'react-native-animated-navigation';
-import First from '../scenes/Main/First';
-import Second from '../scenes/Main/Second';
+import {Wrap, Tab, Stack} from 'react-native-animated-navigation';
+import FirstFirst from '../scenes/Main/First/First';
+import FirstSecond from '../scenes/Main/First/Second';
+import SecondFirst from '../scenes/Main/Second/First';
+import SecondSecond from '../scenes/Main/Second/Second';
 import Third from '../scenes/Main/Third';
 import Fourth from '../scenes/Main/Fourth';
 import Preloader from '../scenes/Preloader/Main';
@@ -9,6 +11,11 @@ import Tabs from '../components/Tabs';
 import navigation from '.';
 
 class MainNavigation extends Component {
+  componentDidMount() {
+    navigation.on('focus:main/first', () => navigation.go('first'));
+    navigation.on('focus:main/second', () => navigation.go('second'));
+  }
+
   onTabPress = async name => {
     switch (name) {
       case 'first': {
@@ -36,10 +43,20 @@ class MainNavigation extends Component {
     return (
       <>
         <Tab.Wrap navigator={'main'} scene={'first'}>
-          {props => <First {...props} />}
+          <Stack.Wrap navigator={'first'} scene={'first'}>
+            {props => <FirstFirst {...props} />}
+          </Stack.Wrap>
+          <Stack.Wrap navigator={'first'} scene={'second'}>
+            {props => <FirstSecond {...props} />}
+          </Stack.Wrap>
         </Tab.Wrap>
         <Tab.Wrap navigator={'main'} scene={'second'}>
-          {props => <Second {...props} />}
+          <Stack.Wrap navigator={'second'} scene={'first'}>
+            {props => <SecondFirst {...props} />}
+          </Stack.Wrap>
+          <Stack.Wrap navigator={'second'} scene={'second'}>
+            {props => <SecondSecond {...props} />}
+          </Stack.Wrap>
         </Tab.Wrap>
         <Tab.Wrap navigator={'main'} scene={'third'}>
           {props => <Third {...props} />}

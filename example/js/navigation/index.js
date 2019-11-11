@@ -2,6 +2,7 @@ import {
   Navigation as navigation,
   Tab,
   Modal,
+  Stack,
 } from 'react-native-animated-navigation';
 
 export const preloader = new Modal.Navigator('preloader');
@@ -16,6 +17,14 @@ main.addScenes(
   new Tab.Scene('fourth'),
 );
 
-navigation.addNavigators(preloader, main);
+export const first = new Stack.Navigator('first');
+
+first.addScenes(new Stack.Scene('first'), new Stack.Scene('second'));
+
+export const second = new Stack.Navigator('second');
+
+second.addScenes(new Stack.Scene('first'), new Stack.Scene('second'));
+
+navigation.addNavigators(preloader, main, first, second);
 
 export default navigation;

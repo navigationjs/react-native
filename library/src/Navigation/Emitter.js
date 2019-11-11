@@ -15,8 +15,8 @@ export default class Emitter {
   off = eventId => {
     const [name, id] = this.parse(eventId);
     if (this.listeners[name] === undefined) return;
-    this.listeners = this.listeners[name].filter(
-      listener => listener.id === id || listener.id === Emitter.ANY
+    this.listeners[name] = this.listeners[name].filter(
+      listener => listener.id !== id && id !== Emitter.ANY
     );
   };
 
@@ -24,7 +24,12 @@ export default class Emitter {
     const [name, id] = this.parse(eventId);
     if (this.listeners[name] === undefined) return;
     this.listeners[name].forEach(listener => {
-      if (listener.id === id || id === Emitter.ANY) listener.fn(args);
+      if (
+        listener.id === id ||
+        listener.id === Emitter.ANY ||
+        id === Emitter.ANY
+      )
+        listener.fn(args);
     });
   };
 
