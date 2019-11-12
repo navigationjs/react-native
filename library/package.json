@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-navigation",
-  "version": "0.16.4",
+  "version": "0.17.0",
   "description": "Animated Navigation for React Native",
   "main": "index.js",
   "author": "Ivan Zotov",
