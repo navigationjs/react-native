@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
 import navigation, { Navigation } from '../Navigation';
-import Events from '../Navigation/Events';
+import Events from '../Events';
 
 export default class Wrap extends Component {
   state = { disabled: false };
@@ -33,10 +33,9 @@ export default class Wrap extends Component {
   handleBackPress = () => {
     const id = navigation.id();
     if (id) {
-      navigation.emit(
-        `${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`,
-        { id }
-      );
+      navigation.emit(`${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`, {
+        id,
+      });
     }
     return true;
   };

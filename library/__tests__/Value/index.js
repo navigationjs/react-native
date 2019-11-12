@@ -36,13 +36,13 @@ describe('Value', () => {
 
     it('should emit event on start and end of animation', async () => {
       const value = new Value('value', 0);
-      const start = jest.fn()
-      const end = jest.fn()
-      navigation.on('animation_start:value', start)
-      navigation.on('animation_end:value', end)
-      await value.to(1)
+      const start = jest.fn();
+      const end = jest.fn();
+      navigation.on('animation_start:value', start);
+      navigation.on('animation_end:value', end);
+      await value.to(1);
       expect(start).toBeCalled();
       expect(end).toBeCalled();
-    })
-  })
+    });
+  });
 });
