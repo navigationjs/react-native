@@ -21,7 +21,7 @@ export default class Wrap extends Component {
     const navigator = navigation.navigators[navigatorName];
     const scene = navigator.scenes[sceneName];
 
-    scene.active.value.addListener(value => {
+    scene.active.value.addListener(({ value }) => {
       if (value === 1) this.setState({ loading: false });
       else if (value === 0) this.setState({ loading: true });
     });

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal.Wrap should match snapshot 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={true}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "white",
+          "height": "100%",
+          "overflow": "hidden",
+          "position": "absolute",
+          "transform": Array [
+            Object {
+              "translateY": 1334,
+            },
+          ],
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        id="main/first"
+        loading={true}
+      />
+    </View>
+  </View>
+</View>
+`;

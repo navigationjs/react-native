@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-navigation",
-  "version": "0.16.3",
+  "version": "0.16.4",
   "description": "Animated Navigation for React Native",
   "main": "index.js",
   "author": "Ivan Zotov",
@@ -14,7 +14,8 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "eslint": "^5.15.0",
+    "@testing-library/react-native": "^5.0.0",
+    "eslint": "^6.6.0",
     "jest": "^24.9.0",
     "prettier": "^1.16.4",
     "react": "^16.11.0",
@@ -22,6 +23,6 @@
     "react-test-renderer": "^16.11.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "@testing-library/react-native"
   }
 }
