@@ -1,4 +1,4 @@
-import Events from '../../src/navigation/Events';
+import Events from '../../src/Events';
 
 describe('Events', () => {
   it('should has listeners as an empty object', () => {
@@ -7,7 +7,7 @@ describe('Events', () => {
   });
 
   it('should has a sepatator', () => {
-    expect(Events.SEPARATOR).toBe(':');
+    expect(Events.SEP).toBe(':');
   });
 
   it('should has any event', () => {

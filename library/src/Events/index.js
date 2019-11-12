@@ -1,5 +1,5 @@
 export default class Events {
-  static SEPARATOR = ':';
+  static SEP = ':';
   static ANY = 'any';
 
   constructor() {
@@ -30,7 +30,7 @@ export default class Events {
   };
 
   parse = eventId => {
-    const [name, id = Events.ANY] = eventId.split(Events.SEPARATOR);
+    const [name, id = Events.ANY] = eventId.split(Events.SEP);
     return [name, id];
   };
 }

@@ -1,5 +1,5 @@
 import { toId } from '../helpers';
-import Events from './Events';
+import Events from '../Events';
 
 export class Navigation {
   static EVENTS = {
@@ -35,10 +35,10 @@ export class Navigation {
     const id = this.id();
 
     if (prevId !== id) {
-      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEPARATOR}${prevId}`, {
+      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEP}${prevId}`, {
         id: prevId,
       });
-      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEPARATOR}${id}`, { id });
+      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEP}${id}`, { id });
     }
 
     return Promise.resolve();
@@ -65,10 +65,10 @@ export class Navigation {
     const id = this.id();
 
     if (prevId !== id) {
-      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEPARATOR}${prevId}`, {
+      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEP}${prevId}`, {
         id: prevId,
       });
-      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEPARATOR}${id}`, { id });
+      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEP}${id}`, { id });
     }
 
     return Promise.resolve();

@@ -3,13 +3,21 @@ import { View, BackHandler } from 'react-native';
 import navigation, { Navigation } from '../Navigation';
 import Events from '../Navigation/Events';
 
-export const link = { wrap: null };
-
 export default class Wrap extends Component {
   state = { disabled: false };
+  counter = 0;
 
   componentDidMount() {
-    link.wrap = this;
+    navigation.on('animation_start', () => {
+      if (this.counter === 0) this.disable();
+      this.counter++;
+    });
+
+    navigation.on('animation_end', () => {
+      this.counter--;
+      if (this.counter === 0) this.enable();
+    });
+
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress
@@ -17,7 +25,8 @@ export default class Wrap extends Component {
   }
 
   componentWillUnmount() {
-    link.wrap = null;
+    navigation.off('animation_start');
+    navigation.off('animation_end');
     this.backHandler.remove();
   }
 
@@ -25,7 +34,7 @@ export default class Wrap extends Component {
     const id = navigation.id();
     if (id) {
       navigation.emit(
-        `${Navigation.EVENTS.ANDROID_BACK}${Events.SEPARATOR}${id}`,
+        `${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`,
         { id }
       );
     }
