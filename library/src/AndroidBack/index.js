@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import navigation, { Navigation } from '../Navigation';
-import Events from '../Navigation/Events';
+import Events from '../Events';
 
 export default class AndroidBack extends Component {
   componentDidMount() {
