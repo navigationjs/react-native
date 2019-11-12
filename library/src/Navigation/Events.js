@@ -1,4 +1,4 @@
-export default class Emitter {
+export default class Events {
   static SEPARATOR = ':';
   static ANY = 'any';
 
@@ -16,7 +16,7 @@ export default class Emitter {
     const [name, id] = this.parse(eventId);
     if (this.listeners[name] === undefined) return;
     this.listeners[name] = this.listeners[name].filter(
-      listener => listener.id !== id && id !== Emitter.ANY
+      listener => listener.id !== id && id !== Events.ANY
     );
   };
 
@@ -24,17 +24,13 @@ export default class Emitter {
     const [name, id] = this.parse(eventId);
     if (this.listeners[name] === undefined) return;
     this.listeners[name].forEach(listener => {
-      if (
-        listener.id === id ||
-        listener.id === Emitter.ANY ||
-        id === Emitter.ANY
-      )
+      if (listener.id === id || listener.id === Events.ANY || id === Events.ANY)
         listener.fn(args);
     });
   };
 
   parse = eventId => {
-    const [name, id = Emitter.ANY] = eventId.split(Emitter.SEPARATOR);
+    const [name, id = Events.ANY] = eventId.split(Events.SEPARATOR);
     return [name, id];
   };
 }

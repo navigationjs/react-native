@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
 import navigation, { Navigation } from '../Navigation';
-import Emitter from '../Navigation/Emitter';
+import Events from '../Navigation/Events';
 
 export const link = { wrap: null };
 
@@ -25,7 +25,7 @@ export default class Wrap extends Component {
     const id = navigation.id();
     if (id) {
       navigation.emit(
-        `${Navigation.EVENTS.ANDROID_BACK}${Emitter.SEPARATOR}${id}`,
+        `${Navigation.EVENTS.ANDROID_BACK}${Events.SEPARATOR}${id}`,
         { id }
       );
     }

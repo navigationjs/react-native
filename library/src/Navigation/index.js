@@ -1,5 +1,5 @@
 import { toId } from '../helpers';
-import Emitter from './Emitter';
+import Events from './Events';
 
 export class Navigation {
   static EVENTS = {
@@ -11,12 +11,12 @@ export class Navigation {
   constructor() {
     this.navigators = {};
     this.history = [];
-    this.emitter = new Emitter();
+    this.events = new Events();
 
     // aliases
-    this.on = this.emitter.on;
-    this.off = this.emitter.off;
-    this.emit = this.emitter.emit;
+    this.on = this.events.on;
+    this.off = this.events.off;
+    this.emit = this.events.emit;
   }
 
   addNavigators = (...navigators) =>
@@ -35,10 +35,10 @@ export class Navigation {
     const id = this.id();
 
     if (prevId !== id) {
-      this.emit(`${Navigation.EVENTS.BLUR}${Emitter.SEPARATOR}${prevId}`, {
+      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEPARATOR}${prevId}`, {
         id: prevId,
       });
-      this.emit(`${Navigation.EVENTS.FOCUS}${Emitter.SEPARATOR}${id}`, { id });
+      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEPARATOR}${id}`, { id });
     }
 
     return Promise.resolve();
@@ -65,10 +65,10 @@ export class Navigation {
     const id = this.id();
 
     if (prevId !== id) {
-      this.emit(`${Navigation.EVENTS.BLUR}${Emitter.SEPARATOR}${prevId}`, {
+      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEPARATOR}${prevId}`, {
         id: prevId,
       });
-      this.emit(`${Navigation.EVENTS.FOCUS}${Emitter.SEPARATOR}${id}`, { id });
+      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEPARATOR}${id}`, { id });
     }
 
     return Promise.resolve();
