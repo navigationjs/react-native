@@ -40,6 +40,7 @@ export default class Wrap extends Component {
       scene: sceneName,
       children,
       overlay,
+      transparent,
       style,
       ...props
     } = this.props;
@@ -62,6 +63,7 @@ export default class Wrap extends Component {
               height: '100%',
               width: '100%',
               overflow: 'hidden',
+              backgroundColor: 'rgba(0,0,0,0.4)',
               transform: [
                 {
                   translateY: scene.active.value.interpolate({
@@ -70,10 +72,7 @@ export default class Wrap extends Component {
                   }),
                 },
               ],
-              backgroundColor: scene.active.value.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['rgba(0,0,0,0)', 'rgba(0,0,0,0.4)'],
-              }),
+              opacity: scene.active.value,
             }}
           />
         )}
@@ -84,7 +83,7 @@ export default class Wrap extends Component {
               position: 'absolute',
               width: '100%',
               height: '100%',
-              backgroundColor: 'white',
+              backgroundColor: transparent ? 'transparent' : 'white',
               overflow: 'hidden',
             },
             {

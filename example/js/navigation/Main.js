@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Wrap, Tab, Stack} from 'react-native-animated-navigation';
+import {Wrap, Tab, Stack, Modal} from 'react-native-animated-navigation';
 import FirstFirst from '../scenes/Main/First/First';
 import FirstSecond from '../scenes/Main/First/Second';
 import SecondFirst from '../scenes/Main/Second/First';
@@ -7,6 +7,7 @@ import SecondSecond from '../scenes/Main/Second/Second';
 import Third from '../scenes/Main/Third';
 import Fourth from '../scenes/Main/Fourth';
 import Preloader from '../scenes/Preloader/Main';
+import Popup from '../scenes/Modals/Popup';
 import Tabs from '../components/Tabs';
 import navigation from '.';
 
@@ -87,6 +88,10 @@ class MainNavigation extends Component {
             onPress={() => this.onTabPress('fourth')}
           />
         </Tabs>
+
+        <Modal.Wrap overlay transparent navigator={'modals'} scene={'popup'}>
+          {props => <Popup {...props} />}
+        </Modal.Wrap>
       </>
     );
   }

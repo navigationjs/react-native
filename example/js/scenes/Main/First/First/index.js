@@ -14,6 +14,7 @@ export default class First extends Component {
   };
 
   onGoToSecond = () => navigation.go('first', 'second');
+  onOpenPopup = () => navigation.go('modals', 'popup');
 
   render() {
     const {id} = this.props;
@@ -23,6 +24,7 @@ export default class First extends Component {
         <AndroidBack id={id} onPress={this.onBackPress} />
         <Text>First/First scene</Text>
         <Button title={'Go to First/Second'} onPress={this.onGoToSecond} />
+        <Button title={'Open Popup'} onPress={this.onOpenPopup} />
       </View>
     );
   }
