@@ -1,6 +1,5 @@
 import { Navigation } from '../../src/navigation';
 import Modal from '../../src/Modal';
-import Stack from '../../src/Stack';
 
 describe('navigation', () => {
   it('should has a navigators as an empty object', () => {
