@@ -2,6 +2,8 @@ export default class Events {
   static SEP = ':';
   static ANY = 'any';
 
+  static id = (name, id) => `${name}${Events.SEP}${id}`;
+
   constructor() {
     this.listeners = {};
   }

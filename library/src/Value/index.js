@@ -20,20 +20,19 @@ export default class Value {
   }
 
   to = (value, duration = this.duration) => {
-    navigation.emit(
-      `${Value.EVENTS.ANIMATION_START}${Events.SEP}${this.name}`,
-      { name: this.name }
-    );
+    navigation.emit(Events.id(Value.EVENTS.ANIMATION_START, this.name), {
+      name: this.name,
+    });
     return new Promise(resolve => {
       this.value.stopAnimation(() => {
         Animated.timing(this.value, {
           toValue: value,
           duration,
+          useNativeDriver: true,
         }).start(() => {
-          navigation.emit(
-            `${Value.EVENTS.ANIMATION_END}${Events.SEP}${this.name}`,
-            { name: this.name }
-          );
+          navigation.emit(Events.id(Value.EVENTS.ANIMATION_END, this.name), {
+            name: this.name,
+          });
           resolve();
         });
       });

@@ -35,10 +35,10 @@ export class Navigation {
     const id = this.id();
 
     if (prevId !== id) {
-      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEP}${prevId}`, {
+      this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
         id: prevId,
       });
-      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEP}${id}`, { id });
+      this.emit(Events.id(Navigation.EVENTS.FOCUS, id), { id });
     }
 
     return Promise.resolve();
@@ -65,10 +65,10 @@ export class Navigation {
     const id = this.id();
 
     if (prevId !== id) {
-      this.emit(`${Navigation.EVENTS.BLUR}${Events.SEP}${prevId}`, {
+      this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
         id: prevId,
       });
-      this.emit(`${Navigation.EVENTS.FOCUS}${Events.SEP}${id}`, { id });
+      this.emit(Events.id(Navigation.EVENTS.FOCUS, id), { id });
     }
 
     return Promise.resolve();

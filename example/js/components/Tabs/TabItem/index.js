@@ -4,8 +4,18 @@ import config from '../../../config';
 import styles from './styles';
 
 export default class TabItem extends Component {
+  state = {active: this.props.active._value === 1};
+
+  componentDidMount() {
+    const {active} = this.props;
+    active.addListener(({value}) => {
+      if (value === 1) this.setState({active: true});
+      else if (value === 0) this.setState({active: false});
+    });
+  }
   render() {
-    const {title, active, onPress} = this.props;
+    const {title, onPress} = this.props;
+    const {active} = this.state;
 
     return (
       <TouchableOpacity onPress={onPress} style={styles.wrap}>
@@ -13,13 +23,9 @@ export default class TabItem extends Component {
           style={[
             styles.title,
             {
-              color: active.interpolate({
-                inputRange: [0, 1],
-                outputRange: [
-                  config.colors.grey.hex(),
-                  config.colors.dark.hex(),
-                ],
-              }),
+              color: active
+                ? config.colors.grey.hex()
+                : config.colors.dark.hex(),
             },
           ]}>
           {title}

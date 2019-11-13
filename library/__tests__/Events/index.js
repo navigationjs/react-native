@@ -1,6 +1,10 @@
 import Events from '../../src/Events';
 
 describe('Events', () => {
+  it('should has a static id method', () => {
+    expect(Events.id('hello', 'world')).toBe('hello:world');
+  });
+
   it('should has listeners as an empty object', () => {
     const events = new Events();
     expect(events.listeners).toEqual({});
