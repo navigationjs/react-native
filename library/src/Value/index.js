@@ -28,7 +28,6 @@ export default class Value {
         Animated.timing(this.value, {
           toValue: value,
           duration,
-          useNativeDriver: true,
         }).start(() => {
           navigation.emit(Events.id(Value.EVENTS.ANIMATION_END, this.name), {
             name: this.name,
