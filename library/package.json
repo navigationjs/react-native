@@ -3,9 +3,24 @@
   "version": "0.18.2",
   "description": "Animated Navigation for React Native",
   "main": "index.js",
-  "author": "Ivan Zotov",
+  "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
   "license": "MIT",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivanzotov/react-native-animated-navigation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ivanzotov/react-native-animated-navigation/issues"
+  },
+  "homepage": "https://ivanzotov.github.io/react-native-animated-navigation/",
+  "keywords": [
+    "react",
+    "react-native",
+    "navigation",
+    "animated",
+    "animation"
+  ],
   "scripts": {
     "format": "prettier --write '__tests__/**/*.js' 'src/**/*.js' 'index.js'"
   },
