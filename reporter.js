@@ -20,8 +20,21 @@ const statusColor = status => {
   }
 }
 
+const statusIcon = status => {
+  switch (status) {
+    case PASSED:
+      return '✓'
+    case FAILED:
+      return '✗'
+    case PENDING:
+      return '–'
+    default:
+      return '–'
+  }
+}
+
 const renderStatus = test =>
-  `<span style='color:${statusColor(test.status)}'>●</span>`
+  `<span style='color:${statusColor(test.status)}'>${statusIcon(test.status)}</span>`
 
 let lastAncestors = ''
 const renderAncestors = test => {
