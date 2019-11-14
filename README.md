@@ -1,8 +1,8 @@
 # React Native Animated Navigation
 
-[![downloads][downloads-badge]][npmcharts] [![version][version-badge]][package]
+[![downloads][downloads-badge]][npmcharts]
+[![version][version-badge]][package]
 [![MIT License][license-badge]][license]
-
 [![PRs Welcome][prs-badge]][prs]
 
 ## LICENSE
