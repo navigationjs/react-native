@@ -22,6 +22,7 @@
     "animation"
   ],
   "scripts": {
+    "test": "jest",
     "format": "prettier --write '__tests__/**/*.js' 'src/**/*.js' 'index.js'"
   },
   "peerDependencies": {
@@ -38,6 +39,8 @@
     "react-test-renderer": "^16.11.0"
   },
   "jest": {
-    "preset": "@testing-library/react-native"
+    "preset": "@testing-library/react-native",
+    "testEnvironment": "node",
+    "reporters": ["../reporter.js"]
   }
 }
