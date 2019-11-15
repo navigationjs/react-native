@@ -1,4 +1,4 @@
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import navigation from '../../src/Navigation';
 import Value from '../../src/Value';
 
@@ -22,6 +22,11 @@ describe('Value', () => {
   it('should has a default duration', () => {
     const value = new Value('value');
     expect(value.duration).toBe(300);
+  });
+
+  it('should has a default easing', () => {
+    const value = new Value('value');
+    expect(value.easing).toBeDefined();
   });
 
   describe('.to', () => {

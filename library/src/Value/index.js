@@ -1,4 +1,4 @@
-import { Animated } from 'react-native';
+import { Animated, Easing } from 'react-native';
 import Events from '../Events';
 import navigation from '../Navigation';
 
@@ -13,6 +13,7 @@ export default class Value {
   constructor(name, value = 0, duration = defaultDuration) {
     this.name = name;
     this.duration = duration;
+    this.easing = Easing.inOut(Easing.ease);
     this.value = new Animated.Value(value);
 
     this._value = value;
@@ -28,6 +29,7 @@ export default class Value {
         Animated.timing(this.value, {
           toValue: value,
           duration,
+          easing: this.easing,
         }).start(() => {
           navigation.emit(Events.id(Value.EVENTS.ANIMATION_END, this.name), {
             name: this.name,

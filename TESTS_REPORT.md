@@ -1,6 +1,6 @@
-**Total:** 47
+**Total:** 48
 
-**<span style='color:green'>Passed:</span>** 47
+**<span style='color:green'>Passed:</span>** 48
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -27,6 +27,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
 
 **Value** **.to**
 
