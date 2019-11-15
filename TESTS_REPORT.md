@@ -1,6 +1,6 @@
-**Total:** 48
+**Total:** 49
 
-**<span style='color:green'>Passed:</span>** 48
+**<span style='color:green'>Passed:</span>** 49
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -9,34 +9,6 @@
 **<span style='color:grey'>Todo:</span>** 0
 
 ---
-
-**AndroidBack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
-
-
-
-**Value**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
-
-**Value** **.to**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit event on start and end of animation  
-
-
 
 **Modal Navigator**
 
@@ -66,15 +38,23 @@
 
 
 
-**Modal.Wrap**
+**Value**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
 
-**Modal.Wrap** **loading prop**
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
+
+**Value** **.to**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit event on start and end of animation  
 
 
 
@@ -87,6 +67,34 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a method `show` that changes active value  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a method `hide` that changes active value  
+
+
+
+**Modal.Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+**Modal.Wrap** **loading prop**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed  
+
+
+
+**Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
+
+
+
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
 
 
 
@@ -128,14 +136,6 @@
 
 
 
-**Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
-
-
-
 **helpers** **toId**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
@@ -159,6 +159,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should move navigator to the end in history if it is already exist  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run go on the navigator  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events  
 
 **navigation** **.back**
 

@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-navigation",
-  "version": "0.18.2",
+  "version": "0.19.0",
   "description": "Animated Navigation for React Native",
   "main": "index.js",
   "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
@@ -41,6 +41,6 @@
   "jest": {
     "preset": "@testing-library/react-native",
     "testEnvironment": "node",
-    "reporters": ["../reporter.js"]
+    "reporters": ["default", "../reporter.js"]
   }
 }

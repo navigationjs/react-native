@@ -69,6 +69,67 @@ describe('navigation', () => {
       await navigation.go('navigator', 'scene');
       expect(navigator.go.mock.calls.length).toBe(1);
     });
+
+    it('should emit events', async () => {
+      const navigation = new Navigation();
+      const navigator = new Modal.Navigator('navigator');
+      const scene1 = new Modal.Scene('scene1');
+      const scene2 = new Modal.Scene('scene2');
+      navigator.addScenes(scene1, scene2);
+      navigation.addNavigators(navigator);
+
+      await navigation.go('navigator', 'scene1');
+
+      expect.assertions(10);
+
+      const willBlur = jest.fn();
+      const willFocus = jest.fn();
+
+      const promiseWillBlur = new Promise(resolve => {
+        navigation.on('will_blur:navigator/scene1', () => {
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1']);
+          willBlur();
+          resolve();
+        });
+      });
+
+      const promiseWillFocus = new Promise(resolve => {
+        navigation.on('will_focus:navigator/scene2', () => {
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1']);
+          willFocus();
+          resolve();
+        });
+      });
+
+      const promiseBlur = new Promise(resolve => {
+        navigation.on('blur:navigator/scene1', () => {
+          expect(willBlur).toBeCalled();
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1', 'scene2']);
+          resolve();
+        });
+      });
+
+      const promiseFocus = new Promise(resolve => {
+        navigation.on('focus:navigator/scene2', () => {
+          expect(willFocus).toBeCalled();
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1', 'scene2']);
+          resolve();
+        });
+      });
+
+      await navigation.go('navigator', 'scene2');
+
+      await Promise.all([
+        promiseWillBlur,
+        promiseWillFocus,
+        promiseBlur,
+        promiseFocus,
+      ]);
+    });
   });
 
   describe('.back', () => {

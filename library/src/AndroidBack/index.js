@@ -5,15 +5,12 @@ import Events from '../Events';
 export default class AndroidBack extends Component {
   componentDidMount() {
     const { id, onPress } = this.props;
-    navigation.on(
-      `${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`,
-      onPress
-    );
+    navigation.on(Events.id(Navigation.EVENTS.ANDROID_BACK, id), onPress);
   }
 
   componentWillUnmount() {
     const { id } = this.props;
-    navigation.off(`${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`);
+    navigation.off(Events.id(Navigation.EVENTS.ANDROID_BACK, id));
   }
 
   render() {

@@ -3,7 +3,9 @@ import Events from '../Events';
 
 export class Navigation {
   static EVENTS = {
+    WILL_BLUR: 'will_blur',
     BLUR: 'blur',
+    WILL_FOCUS: 'will_focus',
     FOCUS: 'focus',
     ANDROID_BACK: 'android_back',
   };
@@ -24,21 +26,31 @@ export class Navigation {
 
   go = async (navigatorName, sceneName, duration) => {
     const prevId = this.id();
+    const nextId = toId(navigatorName, sceneName);
 
     const navigator = this.navigators[navigatorName];
     if (!navigator) return Promise.reject();
+
+    if (prevId !== nextId) {
+      this.emit(Events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
+        id: prevId,
+      });
+      this.emit(Events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
+        id: nextId,
+      });
+    }
 
     this.push(navigatorName);
 
     if (sceneName) await navigator.go(sceneName, duration);
 
-    const id = this.id();
-
-    if (prevId !== id) {
+    if (prevId !== nextId) {
       this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
         id: prevId,
       });
-      this.emit(Events.id(Navigation.EVENTS.FOCUS, id), { id });
+      this.emit(Events.id(Navigation.EVENTS.FOCUS, nextId), {
+        id: nextId,
+      });
     }
 
     return Promise.resolve();
@@ -58,17 +70,27 @@ export class Navigation {
     if (!navigator) return Promise.reject();
 
     const prevId = this.id();
+    const nextId = toId(navigator.name, navigator.current());
+
+    if (prevId !== nextId) {
+      this.emit(Events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
+        id: prevId,
+      });
+      this.emit(Events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
+        id: nextId,
+      });
+    }
 
     await navigator.back(duration);
     if (navigator.history.length === 0) this.history.pop();
 
-    const id = this.id();
-
-    if (prevId !== id) {
+    if (prevId !== nextId) {
       this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
         id: prevId,
       });
-      this.emit(Events.id(Navigation.EVENTS.FOCUS, id), { id });
+      this.emit(Events.id(Navigation.EVENTS.FOCUS, nextId), {
+        id: nextId,
+      });
     }
 
     return Promise.resolve();
