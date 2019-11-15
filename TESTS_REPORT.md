@@ -82,14 +82,6 @@
 
 
 
-**Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
-
-
-
 **AndroidBack**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
@@ -139,6 +131,14 @@
 **helpers** **toId**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
+
+
+
+**Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
 
 
 

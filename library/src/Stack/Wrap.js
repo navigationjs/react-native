@@ -76,7 +76,7 @@ export default class Wrap extends Component {
               {
                 translateX: scene.depth.value.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [0, -width / 2],
+                  outputRange: [0, -width / 5],
                 }),
               },
             ],

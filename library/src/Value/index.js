@@ -13,7 +13,7 @@ export default class Value {
   constructor(name, value = 0, duration = defaultDuration) {
     this.name = name;
     this.duration = duration;
-    this.easing = Easing.inOut(Easing.ease);
+    this.easing = Easing.out(Easing.cubic);
     this.value = new Animated.Value(value);
 
     this._value = value;
