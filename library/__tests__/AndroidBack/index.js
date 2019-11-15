@@ -17,9 +17,9 @@ describe('AndroidBack', () => {
       <AndroidBack id={'example'} onPress={onPress} />
     );
     await navigation.emit('android_back:example');
-    expect(onPress.mock.calls.length).toBe(1);
+    expect(onPress).toHaveBeenCalledTimes(1);
     unmount();
     await navigation.emit('android_back:example');
-    expect(onPress.mock.calls.length).toBe(1);
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 });

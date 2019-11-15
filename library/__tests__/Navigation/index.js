@@ -67,7 +67,7 @@ describe('navigation', () => {
       navigation.addNavigators(navigator);
       navigator.go = jest.fn();
       await navigation.go('navigator', 'scene');
-      expect(navigator.go.mock.calls.length).toBe(1);
+      expect(navigator.go).toHaveBeenCalledTimes(1);
     });
 
     it('should emit events', async () => {
@@ -155,7 +155,7 @@ describe('navigation', () => {
       await navigation.go('navigator', 'scene');
       navigator.back = jest.fn();
       await navigation.back('navigator');
-      expect(navigator.back.mock.calls.length).toBe(1);
+      expect(navigator.back).toHaveBeenCalledTimes(1);
     });
 
     it('should remove navigator from history if navigator history is empty', async () => {
