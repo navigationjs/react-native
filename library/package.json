@@ -1,6 +1,6 @@
 {
   "name": "react-native-animated-navigation",
-  "version": "0.19.2",
+  "version": "0.19.3",
   "description": "Animated Navigation for React Native",
   "main": "index.js",
   "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
@@ -23,6 +23,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "format": "prettier --write '__tests__/**/*.js' 'src/**/*.js' 'index.js'"
   },
   "peerDependencies": {

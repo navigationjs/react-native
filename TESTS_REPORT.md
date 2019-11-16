@@ -1,6 +1,6 @@
-**Total:** 49
+**Total:** 54
 
-**<span style='color:green'>Passed:</span>** 49
+**<span style='color:green'>Passed:</span>** 54
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -90,6 +90,14 @@
 
 
 
+**Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
+
+
+
 **Events**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a static id method  
@@ -134,14 +142,6 @@
 
 
 
-**Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
-
-
-
 **navigation**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a navigators as an empty object  
@@ -149,6 +149,14 @@
 **navigation** **.addNavigators**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigators by their names  
+
+**navigation** **.push**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no such navigator  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to the end  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if it was included  
 
 **navigation** **.go**
 
@@ -169,4 +177,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call back on the navigator  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if navigator history is empty  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit will_blur, will_focus, blur and focus events  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit will_blur and blur events  
 

@@ -23,6 +23,39 @@ describe('navigation', () => {
     });
   });
 
+  describe('.push', () => {
+    it('should reject if no such navigator', () => {
+      expect.assertions(1);
+      try {
+        const navigation = new Navigation();
+        navigation.push('anything', 'scene');
+      } catch (e) {
+        expect(e).toBeNull();
+      }
+    });
+    it('should add navigator to the end', () => {
+      const navigation = new Navigation();
+      const navigator1 = new Modal.Navigator('navigator1');
+      const navigator2 = new Modal.Navigator('navigator2');
+      navigation.addNavigators(navigator1, navigator2);
+      navigation.push('navigator1');
+      expect(navigation.history).toEqual(['navigator1']);
+      navigation.push('navigator2');
+      expect(navigation.history).toEqual(['navigator1', 'navigator2']);
+    });
+
+    it('should remove navigator from history if it was included', () => {
+      const navigation = new Navigation();
+      const navigator1 = new Modal.Navigator('navigator1');
+      const navigator2 = new Modal.Navigator('navigator2');
+      navigation.addNavigators(navigator1, navigator2);
+      navigation.push('navigator1');
+      navigation.push('navigator2');
+      navigation.push('navigator1');
+      expect(navigation.history).toEqual(['navigator2', 'navigator1']);
+    });
+  });
+
   describe('.go', () => {
     it('should reject if there is no such navigator', async () => {
       expect.assertions(1);
@@ -172,6 +205,104 @@ describe('navigation', () => {
       expect(navigation.history).toEqual(['navigator']);
       await navigation.back('navigator');
       expect(navigation.history).toEqual([]);
+    });
+
+    it('should emit will_blur, will_focus, blur and focus events', async () => {
+      const navigation = new Navigation();
+      const navigator = new Modal.Navigator('navigator');
+      const scene1 = new Modal.Scene('scene1');
+      const scene2 = new Modal.Scene('scene2');
+      navigator.addScenes(scene1, scene2);
+      navigation.addNavigators(navigator);
+
+      await navigation.go('navigator', 'scene1');
+      await navigation.go('navigator', 'scene2');
+
+      expect.assertions(10);
+
+      const willBlur = jest.fn();
+      const willFocus = jest.fn();
+
+      const promiseWillBlur = new Promise(resolve => {
+        navigation.on('will_blur:navigator/scene2', () => {
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1', 'scene2']);
+          willBlur();
+          resolve();
+        });
+      });
+
+      const promiseWillFocus = new Promise(resolve => {
+        navigation.on('will_focus:navigator/scene1', () => {
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1', 'scene2']);
+          willFocus();
+          resolve();
+        });
+      });
+
+      const promiseBlur = new Promise(resolve => {
+        navigation.on('blur:navigator/scene2', () => {
+          expect(willBlur).toBeCalled();
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1']);
+          resolve();
+        });
+      });
+
+      const promiseFocus = new Promise(resolve => {
+        navigation.on('focus:navigator/scene1', () => {
+          expect(willFocus).toBeCalled();
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene1']);
+          resolve();
+        });
+      });
+
+      await navigation.back();
+
+      await Promise.all([
+        promiseWillBlur,
+        promiseWillFocus,
+        promiseBlur,
+        promiseFocus,
+      ]);
+    });
+
+    it('should emit will_blur and blur events', async () => {
+      const navigation = new Navigation();
+      const navigator = new Modal.Navigator('navigator');
+      const scene = new Modal.Scene('scene');
+      navigator.addScenes(scene);
+      navigation.addNavigators(navigator);
+
+      await navigation.go('navigator', 'scene');
+
+      expect.assertions(5);
+
+      const willBlur = jest.fn();
+
+      const promiseWillBlur = new Promise(resolve => {
+        navigation.on('will_blur:navigator/scene', () => {
+          expect(navigation.history).toEqual(['navigator']);
+          expect(navigator.history).toEqual(['scene']);
+          willBlur();
+          resolve();
+        });
+      });
+
+      const promiseBlur = new Promise(resolve => {
+        navigation.on('blur:navigator/scene', () => {
+          expect(willBlur).toBeCalled();
+          expect(navigation.history).toEqual([]);
+          expect(navigator.history).toEqual([]);
+          resolve();
+        });
+      });
+
+      await navigation.back();
+
+      await Promise.all([promiseWillBlur, promiseBlur]);
     });
   });
 });

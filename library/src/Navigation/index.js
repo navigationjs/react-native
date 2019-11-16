@@ -58,7 +58,7 @@ export class Navigation {
 
   push = navigatorName => {
     const navigator = this.navigators[navigatorName];
-    if (!navigator) return Promise.reject();
+    if (!navigator) throw null;
 
     const index = this.history.findIndex(it => it === navigatorName);
     if (index >= 0) this.history.splice(index, 1);
@@ -76,12 +76,15 @@ export class Navigation {
     });
 
     const nextNavigator =
-      navigator.history.length === 1
+      navigator.history.length <= 1
         ? this.navigators[this.history[this.history.length - 2]]
         : navigator;
 
     const nextId = nextNavigator
-      ? toId(nextNavigator.name, nextNavigator.current())
+      ? toId(
+          nextNavigator.name,
+          nextNavigator.history[nextNavigator.history.length - 2]
+        )
       : null;
 
     if (nextId) {
