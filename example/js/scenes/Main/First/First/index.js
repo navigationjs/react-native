@@ -22,7 +22,6 @@ export default class First extends Component {
     return (
       <View style={styles.wrap}>
         <AndroidBack id={id} onPress={this.onBackPress} />
-        <Button title={'Go back'} onPress={this.onBackPress} />
         <Text>First/First scene</Text>
         <Button title={'Go to First/Second'} onPress={this.onGoToSecond} />
         <Button title={'Open Popup'} onPress={this.onOpenPopup} />

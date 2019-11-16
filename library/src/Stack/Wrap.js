@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions, Platform } from 'react-native';
 import { toId } from '../helpers';
 import navigation from '../Navigation';
 
@@ -80,6 +80,13 @@ export default class Wrap extends Component {
                 }),
               },
             ],
+            opacity:
+              Platform.OS === 'ios'
+                ? 1
+                : scene.active.value.interpolate({
+                    inputRange: [0, 0.8, 1],
+                    outputRange: [0, 0, 1],
+                  }),
           },
           style,
         ]}
