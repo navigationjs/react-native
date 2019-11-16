@@ -23,7 +23,6 @@ exports[`Modal.Wrap should match snapshot 1`] = `
         Object {
           "backgroundColor": "white",
           "height": "100%",
-          "opacity": 1,
           "overflow": "hidden",
           "position": "absolute",
           "transform": Array [

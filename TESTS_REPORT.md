@@ -1,6 +1,6 @@
-**Total:** 63
+**Total:** 65
 
-**<span style='color:green'>Passed:</span>** 63
+**<span style='color:green'>Passed:</span>** 65
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -9,6 +9,20 @@
 **<span style='color:grey'>Todo:</span>** 0
 
 ---
+
+**Modal.Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove all listeners from scene active on unmount  
+
+**Modal.Wrap** **loading prop**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed  
+
+
 
 **Modal Scene**
 
@@ -96,15 +110,17 @@
 
 
 
-**Modal.Wrap**
+**Wrap**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
 
-**Modal.Wrap** **loading prop**
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed  
+
+**helpers** **fromId**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
 
 
 
@@ -113,6 +129,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
+
+
+
+**helpers** **toId**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
 
 
 
@@ -134,6 +156,8 @@
 
 **Events** **.off**
 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return if no listeners found  
+
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove listener by eventId  
 
 **Events** **.parse**
@@ -145,26 +169,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run all listeners with corresponding id  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run all listeners with corresponding event name  
-
-
-
-**helpers** **toId**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
-
-
-
-**Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
-
-
-
-**helpers** **fromId**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
 
 
 

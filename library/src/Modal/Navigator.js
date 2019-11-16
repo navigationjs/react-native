@@ -23,7 +23,6 @@ export default class Navigator {
   back = async duration => {
     if (this.history.length === 0) return Promise.resolve();
     const name = this.current();
-    if (!name) return Promise.resolve();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
     await scene.hide(duration);

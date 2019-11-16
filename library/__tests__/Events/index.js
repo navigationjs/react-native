@@ -42,6 +42,11 @@ describe('Events', () => {
   });
 
   describe('.off', () => {
+    it('should return if no listeners found', () => {
+      const events = new Events();
+      expect(events.off('hello')).toBeUndefined();
+    });
+
     it('should remove listener by eventId', () => {
       const events = new Events();
 

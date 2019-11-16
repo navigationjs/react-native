@@ -17,6 +17,25 @@ describe('Modal.Wrap', () => {
     expect(baseElement).toMatchSnapshot();
   });
 
+  it('should remove all listeners from scene active on unmount', () => {
+    const navigator = new Modal.Navigator('navigator');
+    const scene = new Modal.Scene('scene');
+    navigator.addScenes(scene);
+    navigation.addNavigators(navigator);
+
+    const { unmount } = render(
+      <Modal.Wrap navigator={'navigator'} scene={'scene'}>
+        {props => <View {...props} />}
+      </Modal.Wrap>
+    );
+
+    scene.active.value = {
+      removeAllListeners: jest.fn(),
+    };
+    unmount();
+    expect(scene.active.value.removeAllListeners).toBeCalled();
+  });
+
   describe('loading prop', () => {
     it('should be true by default', async () => {
       const navigator = new Modal.Navigator('main');
