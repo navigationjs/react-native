@@ -9,6 +9,8 @@ export default class Navigator {
     scenes.forEach(it => (this.scenes[it.name] = it));
   };
 
+  current = () => this.history[this.history.length - 1];
+
   go = async (name, duration) => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
@@ -17,8 +19,6 @@ export default class Navigator {
     await scene.show(duration);
     this.history.push(name);
   };
-
-  current = () => this.history[this.history.length - 1];
 
   back = async duration => {
     if (this.history.length === 0) return Promise.resolve();
