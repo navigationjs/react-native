@@ -70,12 +70,21 @@ export class Navigation {
     if (!navigator) return Promise.reject();
 
     const prevId = this.id();
-    const nextId = toId(navigator.name, navigator.current());
 
-    if (prevId !== nextId) {
-      this.emit(Events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
-        id: prevId,
-      });
+    this.emit(Events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
+      id: prevId,
+    });
+
+    const nextNavigator =
+      navigator.history.length === 1
+        ? this.navigators[this.history[this.history.length - 2]]
+        : navigator;
+
+    const nextId = nextNavigator
+      ? toId(nextNavigator.name, nextNavigator.current())
+      : null;
+
+    if (nextId) {
       this.emit(Events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
         id: nextId,
       });
@@ -84,10 +93,11 @@ export class Navigation {
     await navigator.back(duration);
     if (navigator.history.length === 0) this.history.pop();
 
-    if (prevId !== nextId) {
-      this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
-        id: prevId,
-      });
+    this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
+      id: prevId,
+    });
+
+    if (nextId) {
       this.emit(Events.id(Navigation.EVENTS.FOCUS, nextId), {
         id: nextId,
       });
