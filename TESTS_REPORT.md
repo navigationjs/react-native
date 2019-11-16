@@ -1,6 +1,6 @@
-**Total:** 54
+**Total:** 58
 
-**<span style='color:green'>Passed:</span>** 54
+**<span style='color:green'>Passed:</span>** 58
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -9,34 +9,6 @@
 **<span style='color:grey'>Todo:</span>** 0
 
 ---
-
-**Modal Navigator**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has an empty scenes object  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has an empty history array  
-
-**Modal Navigator** **.addScenes**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scenes  
-
-**Modal Navigator** **.current**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return last item from history  
-
-**Modal Navigator** **.go**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no scene exists  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should not add scene if it is already in history  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scene into history  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke show on scene  
-
-
 
 **Value**
 
@@ -82,11 +54,43 @@
 
 
 
-**AndroidBack**
+**Modal.Navigator**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has an empty scenes object  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has an empty history array  
+
+**Modal.Navigator** **.addScenes**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scenes  
+
+**Modal.Navigator** **.current**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return last item from history  
+
+**Modal.Navigator** **.go**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no scene exists  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should not add scene if it is already in history  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scene into history  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke show on scene  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scene after animation is done  
+
+**Modal.Navigator** **.back**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove scene after animation is done  
+
+**Modal.Navigator** **.reset**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call hide for all scenes with duration 0  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should clean up history after all scenes are hidden  
 
 
 
@@ -139,6 +143,14 @@
 **helpers** **toId**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
+
+
+
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
 
 
 

@@ -1,27 +1,26 @@
-import Navigator from '../../src/Modal/Navigator';
-import Scene from '../../src/Modal/Scene';
+import Modal from '../../src/Modal';
 
-describe('Modal Navigator', () => {
+describe('Modal.Navigator', () => {
   it('should has a name', () => {
-    const navigator = new Navigator('modals');
-    expect(navigator.name).toBe('modals');
+    const navigator = new Modal.Navigator('navigator');
+    expect(navigator.name).toBe('navigator');
   });
 
   it('should has an empty scenes object', () => {
-    const navigator = new Navigator('modals');
+    const navigator = new Modal.Navigator('navigator');
     expect(navigator.scenes).toEqual({});
   });
 
   it('should has an empty history array', () => {
-    const navigator = new Navigator('modals');
+    const navigator = new Modal.Navigator('navigator');
     expect(navigator.history).toEqual([]);
   });
 
   describe('.addScenes', () => {
     it('should add scenes', () => {
-      const navigator = new Navigator('modals');
-      const first = new Scene('first');
-      const second = new Scene('second');
+      const navigator = new Modal.Navigator('navigator');
+      const first = new Modal.Scene('first');
+      const second = new Modal.Scene('second');
       navigator.addScenes(first, second);
       expect(navigator.scenes).toEqual({ first, second });
     });
@@ -29,7 +28,7 @@ describe('Modal Navigator', () => {
 
   describe('.current', () => {
     it('should return last item from history', () => {
-      const navigator = new Navigator('modals');
+      const navigator = new Modal.Navigator('navigator');
       navigator.history = ['first', 'second'];
       expect(navigator.current()).toBe('second');
     });
@@ -37,8 +36,8 @@ describe('Modal Navigator', () => {
 
   describe('.go', () => {
     it('should reject if no scene exists', async () => {
-      const navigator = new Navigator('modals');
-      navigator.addScenes(new Scene('menu'));
+      const navigator = new Modal.Navigator('navigator');
+      navigator.addScenes(new Modal.Scene('scene'));
 
       expect.assertions(1);
       try {
@@ -49,30 +48,82 @@ describe('Modal Navigator', () => {
     });
 
     it('should not add scene if it is already in history', async () => {
-      const navigator = new Navigator('modals');
-      navigator.addScenes(new Scene('menu'));
+      const navigator = new Modal.Navigator('navigator');
+      navigator.addScenes(new Modal.Scene('scene'));
       expect(navigator.history).toEqual([]);
-      await navigator.go('menu');
-      expect(navigator.history).toEqual(['menu']);
-      await navigator.go('menu');
-      expect(navigator.history).toEqual(['menu']);
+      await navigator.go('scene');
+      expect(navigator.history).toEqual(['scene']);
+      await navigator.go('scene');
+      expect(navigator.history).toEqual(['scene']);
     });
 
     it('should add scene into history', async () => {
-      const navigator = new Navigator('modals');
-      navigator.addScenes(new Scene('menu'));
+      const navigator = new Modal.Navigator('navigator');
+      navigator.addScenes(new Modal.Scene('scene'));
       expect(navigator.history).toEqual([]);
-      await navigator.go('menu');
-      expect(navigator.history).toEqual(['menu']);
+      await navigator.go('scene');
+      expect(navigator.history).toEqual(['scene']);
     });
 
     it('should invoke show on scene', async () => {
-      const navigator = new Navigator('modals');
-      const scene = new Scene('menu');
+      const navigator = new Modal.Navigator('navigator');
+      const scene = new Modal.Scene('scene');
       navigator.addScenes(scene);
       scene.show = jest.fn();
-      await navigator.go('menu');
+      await navigator.go('scene');
       expect(scene.show).toBeCalled();
+    });
+
+    it('should add scene after animation is done', async () => {
+      const navigator = new Modal.Navigator('navigator');
+      navigator.addScenes(new Modal.Scene('scene'));
+      expect.assertions(2);
+      const promise = navigator.go('scene');
+      expect(navigator.history).toEqual([]);
+      await promise;
+      expect(navigator.history).toEqual(['scene']);
+    });
+  });
+
+  describe('.back', () => {
+    it('should remove scene after animation is done', async () => {
+      const navigator = new Modal.Navigator('navigator');
+      navigator.addScenes(new Modal.Scene('scene'));
+      await navigator.go('scene');
+      expect.assertions(2);
+      const promise = navigator.back();
+      expect(navigator.history).toEqual(['scene']);
+      await promise;
+      expect(navigator.history).toEqual([]);
+    });
+  });
+
+  describe('.reset', () => {
+    it('should call hide for all scenes with duration 0', async () => {
+      const navigator = new Modal.Navigator('navigator');
+      const scene1 = new Modal.Scene('scene1');
+      const scene2 = new Modal.Scene('scene2');
+      navigator.addScenes(scene1, scene2);
+      await navigator.go('scene1');
+      await navigator.go('scene2');
+      scene1.hide = jest.fn();
+      scene2.hide = jest.fn();
+      await navigator.reset();
+      expect(scene1.hide).toBeCalledWith(0);
+      expect(scene2.hide).toBeCalledWith(0);
+    });
+
+    it('should clean up history after all scenes are hidden', async () => {
+      const navigator = new Modal.Navigator('navigator');
+      const scene1 = new Modal.Scene('scene1');
+      const scene2 = new Modal.Scene('scene2');
+      navigator.addScenes(scene1, scene2);
+      await navigator.go('scene1');
+      await navigator.go('scene2');
+      const promise = navigator.reset();
+      expect(navigator.history).toEqual(['scene1', 'scene2']);
+      await promise;
+      expect(navigator.history).toEqual([]);
     });
   });
 });

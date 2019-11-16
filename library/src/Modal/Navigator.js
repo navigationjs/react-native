@@ -9,14 +9,13 @@ export default class Navigator {
     scenes.forEach(it => (this.scenes[it.name] = it));
   };
 
-  go = (name, duration) => {
+  go = async (name, duration) => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
     const alreadyInHistory = this.history.includes(name);
     if (alreadyInHistory) return Promise.resolve();
-
+    await scene.show(duration);
     this.history.push(name);
-    return scene.show(duration);
   };
 
   current = () => this.history[this.history.length - 1];
@@ -27,14 +26,14 @@ export default class Navigator {
     if (!name) return Promise.resolve();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
+    await scene.hide(duration);
     this.history.pop();
-    return scene.hide(duration);
   };
 
-  reset = () => {
-    this.history = [];
-    return Promise.all(
+  reset = async () => {
+    await Promise.all(
       Object.keys(this.scenes).map(key => this.scenes[key].hide(0))
     );
+    this.history = [];
   };
 }
