@@ -9,16 +9,16 @@
 // site configuration options.
 
 const siteConfig = {
-  title: 'React Native Animated Navigation',
+  title: '',
   tagline: 'Simple and well-tested navigation',
-  url: 'https://ivanzotov.github.io',
-  baseUrl: '/react-native-animated-navigation/',
-  projectName: 'react-native-animated-navigation',
-  organizationName: 'ivanzotov',
+  url: 'https://navigationjs.github.io',
+  baseUrl: '/react-native',
+  projectName: '@navigationjs/react-native',
+  organizationName: 'navigationjs',
   headerLinks: [
     {doc: 'installation', label: 'Docs'},
     {doc: 'navigation', label: 'API'},
-    {href: 'https://github.com/ivanzotov/react-native-animated-navigation', label: 'Github'},
+    {href: 'https://github.com/navigationjs/react-native', label: 'Github'},
   ],
 
   headerIcon: 'img/favicon.ico',

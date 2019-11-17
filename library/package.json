@@ -1,25 +1,23 @@
 {
-  "name": "react-native-animated-navigation",
+  "name": "@navigationjs/react-native",
   "version": "0.20.0",
-  "description": "Animated Navigation for React Native",
+  "description": "Simple and well-tested React Native navigation",
   "main": "index.js",
   "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
   "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/ivanzotov/react-native-animated-navigation.git"
+    "url": "https://github.com/navigationjs/react-native.git"
   },
   "bugs": {
-    "url": "https://github.com/ivanzotov/react-native-animated-navigation/issues"
+    "url": "https://github.com/navigationjs/react-native/issues"
   },
-  "homepage": "https://ivanzotov.github.io/react-native-animated-navigation/",
+  "homepage": "https://navigationjs.github.io/react-native/",
   "keywords": [
     "react",
     "react-native",
-    "navigation",
-    "animated",
-    "animation"
+    "navigation"
   ],
   "scripts": {
     "test": "jest",

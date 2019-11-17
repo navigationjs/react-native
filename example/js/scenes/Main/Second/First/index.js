@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
-import {AndroidBack} from 'react-native-animated-navigation';
+import {AndroidBack} from '@navigationjs/react-native';
 import navigation, {main} from '../../../../navigation';
 import styles from './styles';
 

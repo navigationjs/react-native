@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Wrap, Tab, Stack, Modal} from 'react-native-animated-navigation';
+import {Wrap, Tab, Stack, Modal} from '@navigationjs/react-native';
 import FirstFirst from '../scenes/Main/First/First';
 import FirstSecond from '../scenes/Main/First/Second';
 import SecondFirst from '../scenes/Main/Second/First';

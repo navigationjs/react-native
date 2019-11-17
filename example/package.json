@@ -14,7 +14,7 @@
     "chroma-js": "^2.1.0",
     "react": "16.9.0",
     "react-native": "0.61.4",
-    "react-native-animated-navigation": "../library",
+    "@navigationjs/react-native": "../library",
     "react-native-iphone-x-helper": "^1.2.1"
   },
   "devDependencies": {

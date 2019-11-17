@@ -3,7 +3,7 @@ import {
   Tab,
   Modal,
   Stack,
-} from 'react-native-animated-navigation';
+} from '@navigationjs/react-native';
 
 export const preloader = new Modal.Navigator('preloader');
 preloader.addScenes(new Modal.Scene('main'));
