@@ -1,5 +1,0 @@
----
-id: navigator
-title: Navigator
----
-

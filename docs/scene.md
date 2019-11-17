@@ -1,5 +1,0 @@
----
-id: scene
-title: Scene
----
-

@@ -1,5 +1,0 @@
----
-id: value
-title: Value
----
-
