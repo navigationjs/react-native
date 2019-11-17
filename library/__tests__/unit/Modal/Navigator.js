@@ -1,4 +1,4 @@
-import Modal from '../../src/Modal';
+import Modal from '../../../src/Modal';
 
 describe('Modal.Navigator', () => {
   it('should has a name', () => {

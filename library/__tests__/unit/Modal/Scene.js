@@ -1,5 +1,5 @@
-import Scene from '../../src/Modal/Scene';
-import Value from '../../src/Value';
+import Scene from '../../../src/Modal/Scene';
+import Value from '../../../src/Value';
 
 describe('Modal Scene', () => {
   it('should has a name', () => {

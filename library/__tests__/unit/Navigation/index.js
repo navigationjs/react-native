@@ -1,5 +1,5 @@
-import { Navigation } from '../../src/navigation';
-import Modal from '../../src/Modal';
+import { Navigation } from '../../../src/navigation';
+import Modal from '../../../src/Modal';
 
 describe('navigation', () => {
   it('should has a navigators as an empty object', () => {

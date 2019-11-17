@@ -1,4 +1,4 @@
-import Events from '../../src/Events';
+import Events from '../../../src/Events';
 
 describe('Events', () => {
   it('should has a static id method', () => {

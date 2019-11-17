@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import Wrap from '../../src/Wrap';
-import navigation from '../../src/Navigation';
-import Value from '../../src/Value';
+import Wrap from '../../../src/Wrap';
+import navigation from '../../../src/Navigation';
+import Value from '../../../src/Value';
 
 describe('Wrap', () => {
   it('should match snapshot', async () => {

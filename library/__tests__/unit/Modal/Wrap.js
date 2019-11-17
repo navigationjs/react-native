@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import Modal from '../../src/Modal';
-import navigation from '../../src/Navigation';
+import Modal from '../../../src/Modal';
+import navigation from '../../../src/Navigation';
 
 describe('Modal.Wrap', () => {
   it('should match snapshot', async () => {

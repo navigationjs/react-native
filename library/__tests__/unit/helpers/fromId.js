@@ -1,4 +1,4 @@
-import { fromId } from '../../src/helpers';
+import { fromId } from '../../../src/helpers';
 
 describe('helpers', () => {
   describe('fromId', () => {

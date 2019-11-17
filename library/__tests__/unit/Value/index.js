@@ -1,6 +1,6 @@
 import { Animated, Easing } from 'react-native';
-import navigation from '../../src/Navigation';
-import Value from '../../src/Value';
+import navigation from '../../../src/Navigation';
+import Value from '../../../src/Value';
 
 describe('Value', () => {
   it('should has a name', () => {
