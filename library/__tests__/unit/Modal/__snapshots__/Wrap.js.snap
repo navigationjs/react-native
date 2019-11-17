@@ -42,3 +42,106 @@ exports[`Modal.Wrap should match snapshot 1`] = `
   </View>
 </View>
 `;
+
+exports[`Modal.Wrap should render backgroundColor transparent if transparent prop passed 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={true}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "transparent",
+          "height": "100%",
+          "overflow": "hidden",
+          "position": "absolute",
+          "transform": Array [
+            Object {
+              "translateY": 1334,
+            },
+          ],
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        id="main/first"
+        loading={true}
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Modal.Wrap should render overlay view if overlay prop passed 1`] = `
+<View
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={true}
+    pointerEvents="box-none"
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "rgba(0,0,0,0.4)",
+          "height": "100%",
+          "opacity": 0,
+          "overflow": "hidden",
+          "position": "absolute",
+          "transform": Array [
+            Object {
+              "translateY": 1334,
+            },
+          ],
+          "width": "100%",
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "backgroundColor": "white",
+          "height": "100%",
+          "overflow": "hidden",
+          "position": "absolute",
+          "transform": Array [
+            Object {
+              "translateY": 1334,
+            },
+          ],
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        id="main/first"
+        loading={true}
+      />
+    </View>
+  </View>
+</View>
+`;

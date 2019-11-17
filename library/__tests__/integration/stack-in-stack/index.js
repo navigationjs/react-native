@@ -1,3 +1,3 @@
 describe('Stack in Stack', () => {
-  it.todo('should')
-})
+  it.todo('should');
+});
