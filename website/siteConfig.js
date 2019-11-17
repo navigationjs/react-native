@@ -17,7 +17,7 @@ const siteConfig = {
   organizationName: 'ivanzotov',
   headerLinks: [
     {doc: 'installation', label: 'Docs'},
-    {doc: 'api-navigation', label: 'API'},
+    {doc: 'navigation', label: 'API'},
     {href: 'https://github.com/ivanzotov/react-native-animated-navigation', label: 'Github'},
   ],
 
@@ -35,8 +35,6 @@ const siteConfig = {
   highlight: {
     theme: 'default',
   },
-
-  scripts: ['https://buttons.github.io/buttons.js'],
 
   onPageNav: 'separate',
   cleanUrl: true,

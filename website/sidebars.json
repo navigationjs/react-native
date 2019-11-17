@@ -3,6 +3,11 @@
     "Getting Started": ["installation"]
   },
   "api": {
-    "API Reference": ["api-navigation"]
+    "API Reference": [
+      "navigation",
+      "navigator",
+      "scene",
+      "value"
+    ]
   }
 }

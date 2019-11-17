@@ -1,0 +1,5 @@
+---
+id: value
+title: Value
+---
+
