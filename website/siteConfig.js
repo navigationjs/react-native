@@ -12,7 +12,7 @@ const siteConfig = {
   title: '',
   tagline: 'Simple and well-tested navigation',
   url: 'https://navigationjs.github.io',
-  baseUrl: '/react-native',
+  baseUrl: '/react-native/',
   projectName: 'react-native',
   organizationName: 'navigationjs',
   headerLinks: [
