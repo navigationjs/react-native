@@ -15,6 +15,28 @@ describe('Wrap', () => {
     expect(baseElement).toMatchSnapshot();
   });
 
+  it('should subscribe to animation_start and animation_end', async () => {
+    navigation.events.listeners = {};
+
+    const { unmount } = render(
+      <Wrap testID={'wrap'}>
+        <View />
+      </Wrap>
+    );
+
+    expect(navigation.events.listeners).toEqual({
+      animation_start: [{ id: 'any', fn: expect.any(Function) }],
+      animation_end: [{ id: 'any', fn: expect.any(Function) }],
+    });
+
+    unmount();
+
+    expect(navigation.events.listeners).toEqual({
+      animation_start: [],
+      animation_end: [],
+    });
+  });
+
   it('should disable pointer events during animation any values', async () => {
     const { getByTestId } = render(
       <Wrap testID={'wrap'}>
