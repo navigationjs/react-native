@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {View, Text, Button} from 'react-native';
-import {AndroidBack} from '@navigationjs/react-native';
+import navigation, {AndroidBack} from '@navigationjs/react-native';
+import {main} from '../../../../navigation';
 import styles from './styles';
-import navigation, {main} from '../../../../navigation';
 
 export default class First extends Component {
   onBackPress = async () => {
     await navigation.push('main');
 
     if (main.history.length > 1) {
-      navigation.back();
+      await navigation.back();
     }
   };
 

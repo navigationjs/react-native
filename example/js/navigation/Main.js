@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Wrap, Tab, Stack, Modal} from '@navigationjs/react-native';
+import navigation, {Wrap, Tab, Stack, Modal} from '@navigationjs/react-native';
 import FirstFirst from '../scenes/Main/First/First';
 import FirstSecond from '../scenes/Main/First/Second';
 import SecondFirst from '../scenes/Main/Second/First';
@@ -9,7 +9,6 @@ import Fourth from '../scenes/Main/Fourth';
 import Preloader from '../scenes/Preloader/Main';
 import Popup from '../scenes/Modals/Popup';
 import Tabs from '../components/Tabs';
-import navigation from '.';
 
 class MainNavigation extends Component {
   componentDidMount() {

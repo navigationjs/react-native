@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Animated} from 'react-native';
+import navigation from '@navigationjs/react-native';
 import Loader from '../../../components/Loader';
 import styles from './styles';
 import config from '../../../config';
-import navigation, {preloader, first, second} from '../../../navigation';
+import {preloader, first, second} from '../../../navigation';
 
 export default class Preloader extends Component {
   async componentDidMount() {

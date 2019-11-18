@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import {AndroidBack} from '@navigationjs/react-native';
-import navigation from '../../../navigation';
+import navigation, {AndroidBack} from '@navigationjs/react-native';
 import styles from './styles';
 
 export default class Popup extends Component {

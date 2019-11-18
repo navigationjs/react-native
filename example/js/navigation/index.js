@@ -1,9 +1,4 @@
-import {
-  Navigation as navigation,
-  Tab,
-  Modal,
-  Stack,
-} from '@navigationjs/react-native';
+import navigation, {Tab, Modal, Stack} from '@navigationjs/react-native';
 
 export const preloader = new Modal.Navigator('preloader');
 preloader.addScenes(new Modal.Scene('main'));
@@ -29,5 +24,3 @@ export const second = new Stack.Navigator('second');
 second.addScenes(new Stack.Scene('first'), new Stack.Scene('second'));
 
 navigation.addNavigators(preloader, main, modals, first, second);
-
-export default navigation;
