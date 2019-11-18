@@ -1,6 +1,6 @@
-**Total:** 72
+**Total:** 79
 
-**<span style='color:green'>Passed:</span>** 71
+**<span style='color:green'>Passed:</span>** 78
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -10,53 +10,47 @@
 
 ---
 
-**Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe to animation_start and animation_end  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
-
-
-
-**Modal Scene**
+**Stack Scene**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active and depth  
 
-**Modal Scene** **.show**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+**Stack Scene** **.show**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
 
-**Modal Scene** **.hide**
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active and depth values  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+**Stack Scene** **.hide**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active and depth values  
+
+**Stack Scene** **.dive**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change depth value  
 
 
-**Modal.Wrap**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+**Value**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render overlay view if overlay prop passed  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render backgroundColor transparent if transparent prop passed  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove all listeners from scene active on unmount  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
 
-**Modal.Wrap** **loading prop**
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed and true when hidden  
+**Value** **.to**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should pass id and loading props to children if children if function  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit event on start and end of animation  
 
 
 
@@ -106,6 +100,36 @@
 
 
 
+**Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe to animation_start and animation_end  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events during animation any values  
+
+
+
+**Modal.Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render overlay view if overlay prop passed  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render backgroundColor transparent if transparent prop passed  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove all listeners from scene active on unmount  
+
+**Modal.Wrap** **loading prop**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed and true when hidden  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should pass id and loading props to children if children if function  
+
+
+
 **AndroidBack**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
@@ -148,9 +172,23 @@
 
 
 
-**Stack in Stack**
+**Modal Scene**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
+
+**Modal Scene** **.show**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+**Modal Scene** **.hide**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
 
 
 
@@ -166,23 +204,9 @@
 
 
 
-**Value**
+**Stack in Stack**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
-
-**Value** **.to**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit event on start and end of animation  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
 
 
 

@@ -16,9 +16,9 @@ export default class Navigator {
     const alreadyInHistory = this.history.includes(name);
     if (alreadyInHistory) return Promise.resolve();
 
-    const promises = this.history.map(sceneName => {
+    const promises = this.history.map((sceneName, level) => {
       const scene = this.scenes[sceneName];
-      return scene.backward(duration);
+      return scene.dive(level + 1, duration);
     });
 
     promises.push(scene.show(duration));
@@ -40,9 +40,9 @@ export default class Navigator {
 
     promises.push(scene.hide(duration));
 
-    this.history.forEach(sceneName => {
+    this.history.forEach((sceneName, level) => {
       const scene = this.scenes[sceneName];
-      promises.push(scene.forward(duration));
+      promises.push(scene.dive(level - 1, duration));
     });
 
     await Promise.all(promises);
