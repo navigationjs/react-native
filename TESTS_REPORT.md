@@ -1,6 +1,6 @@
-**Total:** 103
+**Total:** 107
 
-**<span style='color:green'>Passed:</span>** 102
+**<span style='color:green'>Passed:</span>** 106
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -170,16 +170,6 @@
 
 
 
-**Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe to lock and unlock  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events when navigation is locked  
-
-
-
 **navigation**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a navigators as an empty object  
@@ -208,6 +198,10 @@
 
 **navigation** **.go**
 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve immediately if navigation is locked  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should lock navigation immediately and unlock at the end  
+
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if there is no such navigator  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to history  
@@ -228,6 +222,10 @@
 
 **navigation** **.back**
 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve immediately if navigation is locked  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should lock navigation immediately and unlock at the end  
+
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve if history is empty  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call back on the navigator  
@@ -243,6 +241,34 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should clean history  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke reset on each navigator  
+
+
+
+**Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe to lock and unlock  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events when navigation is locked  
+
+
+
+**Value**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
+
+**Value** **.to**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
 
 
 
@@ -280,14 +306,6 @@
 
 
 
-**AndroidBack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
-
-
-
 **helpers** **fromId**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
@@ -300,25 +318,15 @@
 
 
 
-**Value**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
-
-**Value** **.to**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
-
-
-
 **helpers** **toId**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
+
+
+
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
 

@@ -102,6 +102,26 @@ describe('navigation', () => {
   });
 
   describe('.go', () => {
+    it('should resolve immediately if navigation is locked', () => {
+      const navigation = new Navigation();
+      navigation.locked = true;
+      expect(navigation.go()).resolves.toBeUndefined();
+    })
+
+    it('should lock navigation immediately and unlock at the end', async () => {
+      const navigation = new Navigation();
+      const navigator = new Modal.Navigator('navigator');
+      const scene = new Modal.Scene('scene');
+      navigator.addScenes(scene);
+      navigation.addNavigators(navigator);
+
+      expect(navigation.locked).toBeFalsy();
+      const promise = navigation.go('navigator', 'scene')
+      expect(navigation.locked).toBeTruthy();
+      await promise
+      expect(navigation.locked).toBeFalsy();
+    })
+
     it('should reject if there is no such navigator', async () => {
       expect.assertions(1);
       try {
@@ -244,6 +264,26 @@ describe('navigation', () => {
   });
 
   describe('.back', () => {
+    it('should resolve immediately if navigation is locked', () => {
+      const navigation = new Navigation();
+      navigation.locked = true;
+      expect(navigation.back()).resolves.toBeUndefined();
+    })
+
+    it('should lock navigation immediately and unlock at the end', async () => {
+      const navigation = new Navigation();
+      const navigator = new Modal.Navigator('navigator');
+      const scene = new Modal.Scene('scene');
+      navigator.addScenes(scene);
+      navigation.addNavigators(navigator);
+      await navigation.go('navigator', 'scene')
+      expect(navigation.locked).toBeFalsy();
+      const promise = navigation.back()
+      expect(navigation.locked).toBeTruthy();
+      await promise
+      expect(navigation.locked).toBeFalsy();
+    })
+
     it('should resolve if history is empty', async () => {
       const navigation = new Navigation();
       const navigator = new Modal.Navigator('navigator');
