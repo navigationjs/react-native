@@ -1,15 +1,8 @@
 import { Animated, Easing } from 'react-native';
-import Events from '../Events';
-import navigation from '../Navigation';
 
 const defaultDuration = 300;
 
 export default class Value {
-  static EVENTS = {
-    ANIMATION_START: 'animation_start',
-    ANIMATION_END: 'animation_end',
-  };
-
   constructor(name, value = 0, duration = defaultDuration) {
     this.name = name;
     this.duration = duration;
@@ -21,9 +14,6 @@ export default class Value {
   }
 
   to = (value, duration = this.duration) => {
-    navigation.emit(Events.id(Value.EVENTS.ANIMATION_START, this.name), {
-      name: this.name,
-    });
     return new Promise(resolve => {
       this.value.stopAnimation(() => {
         Animated.timing(this.value, {
@@ -31,9 +21,6 @@ export default class Value {
           duration,
           easing: this.easing,
         }).start(() => {
-          navigation.emit(Events.id(Value.EVENTS.ANIMATION_END, this.name), {
-            name: this.name,
-          });
           resolve();
         });
       });

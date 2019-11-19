@@ -7,6 +7,18 @@ describe('navigation', () => {
     expect(navigation.navigators).toEqual({});
   });
 
+  it('should has static EVENTS list', () => {
+    expect(Navigation.EVENTS).toEqual({
+      LOCK: 'lock',
+      UNLOCK: 'unlock',
+      WILL_BLUR: 'will_blur',
+      BLUR: 'blur',
+      WILL_FOCUS: 'will_focus',
+      FOCUS: 'focus',
+      ANDROID_BACK: 'android_back',
+    });
+  });
+
   describe('.addNavigators', () => {
     it('should add navigators by their names', () => {
       const navigation = new Navigation();
@@ -23,36 +35,69 @@ describe('navigation', () => {
     });
   });
 
-  describe('.push', () => {
-    it('should reject if no such navigator', () => {
-      expect.assertions(1);
-      try {
-        const navigation = new Navigation();
-        navigation.push('anything', 'scene');
-      } catch (e) {
-        expect(e).toBeNull();
-      }
-    });
-    it('should add navigator to the end', () => {
+  describe('.lock', () => {
+    it('should set locked to true', () => {
       const navigation = new Navigation();
-      const navigator1 = new Modal.Navigator('navigator1');
-      const navigator2 = new Modal.Navigator('navigator2');
-      navigation.addNavigators(navigator1, navigator2);
-      navigation.push('navigator1');
-      expect(navigation.history).toEqual(['navigator1']);
-      navigation.push('navigator2');
-      expect(navigation.history).toEqual(['navigator1', 'navigator2']);
+      expect(navigation.locked).toBeFalsy();
+      navigation.lock();
+      expect(navigation.locked).toBeTruthy();
     });
 
-    it('should remove navigator from history if it was included', () => {
+    it('should set increment lock counter', () => {
       const navigation = new Navigation();
-      const navigator1 = new Modal.Navigator('navigator1');
-      const navigator2 = new Modal.Navigator('navigator2');
-      navigation.addNavigators(navigator1, navigator2);
-      navigation.push('navigator1');
-      navigation.push('navigator2');
-      navigation.push('navigator1');
-      expect(navigation.history).toEqual(['navigator2', 'navigator1']);
+      expect(navigation.lockCounter).toBe(0);
+      navigation.lock();
+      navigation.lock();
+      navigation.lock();
+      expect(navigation.lockCounter).toBe(3);
+    });
+
+    it('should emit lock event', () => {
+      const navigation = new Navigation();
+      const handler = jest.fn();
+      navigation.on('lock', handler);
+      navigation.lock();
+      navigation.lock();
+      navigation.lock();
+      expect(handler).toHaveBeenCalledTimes(3);
+    });
+  });
+
+  describe('.unlock', () => {
+    it('should set decrement locked counter', () => {
+      const navigation = new Navigation();
+      navigation.lockCounter = 3;
+      navigation.unlock();
+      expect(navigation.lockCounter).toBe(2);
+      navigation.unlock();
+      expect(navigation.lockCounter).toBe(1);
+    });
+
+    it('should set locked to false if counter is 0', () => {
+      const navigation = new Navigation();
+      navigation.locked = true;
+      navigation.lockCounter = 3;
+      navigation.unlock();
+      expect(navigation.locked).toBeTruthy();
+      navigation.unlock();
+      expect(navigation.locked).toBeTruthy();
+      navigation.unlock();
+      expect(navigation.locked).toBeFalsy();
+    });
+
+    it('should emit unlock event if counter is 0', () => {
+      const navigation = new Navigation();
+      navigation.locked = true;
+      navigation.lockCounter = 3;
+
+      const handler = jest.fn();
+      navigation.on('unlock', handler);
+
+      navigation.unlock();
+      navigation.unlock();
+      navigation.unlock();
+
+      expect(handler).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -162,6 +207,39 @@ describe('navigation', () => {
         promiseBlur,
         promiseFocus,
       ]);
+    });
+  });
+
+  describe('.push', () => {
+    it('should reject if no such navigator', () => {
+      expect.assertions(1);
+      try {
+        const navigation = new Navigation();
+        navigation.push('anything', 'scene');
+      } catch (e) {
+        expect(e).toBeNull();
+      }
+    });
+    it('should add navigator to the end', () => {
+      const navigation = new Navigation();
+      const navigator1 = new Modal.Navigator('navigator1');
+      const navigator2 = new Modal.Navigator('navigator2');
+      navigation.addNavigators(navigator1, navigator2);
+      navigation.push('navigator1');
+      expect(navigation.history).toEqual(['navigator1']);
+      navigation.push('navigator2');
+      expect(navigation.history).toEqual(['navigator1', 'navigator2']);
+    });
+
+    it('should remove navigator from history if it was included', () => {
+      const navigation = new Navigation();
+      const navigator1 = new Modal.Navigator('navigator1');
+      const navigator2 = new Modal.Navigator('navigator2');
+      navigation.addNavigators(navigator1, navigator2);
+      navigation.push('navigator1');
+      navigation.push('navigator2');
+      navigation.push('navigator1');
+      expect(navigation.history).toEqual(['navigator2', 'navigator1']);
     });
   });
 

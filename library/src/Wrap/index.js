@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
 import navigation, { Navigation } from '../Navigation';
-import Events from '../Events';
 
 export default class Wrap extends Component {
-  state = { disabled: false };
-  counter = 0;
+  state = { lock: false };
 
   componentDidMount() {
-    navigation.on('animation_start', () => {
-      if (this.counter === 0) this.disable();
-      this.counter++;
-    });
-
-    navigation.on('animation_end', () => {
-      this.counter--;
-      if (this.counter === 0) this.enable();
-    });
+    navigation.on(Navigation.EVENTS.LOCK, () => this.lock());
+    navigation.on(Navigation.EVENTS.UNLOCK, () => this.unlock());
 
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -25,33 +16,29 @@ export default class Wrap extends Component {
   }
 
   componentWillUnmount() {
-    navigation.off('animation_start');
-    navigation.off('animation_end');
+    navigation.off(Navigation.EVENTS.LOCK);
+    navigation.off(Navigation.EVENTS.UNLOCK);
     this.backHandler.remove();
   }
 
   handleBackPress = () => {
     const id = navigation.id();
-    if (id) {
-      navigation.emit(`${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`, {
-        id,
-      });
-    }
+    if (id) navigation.androidBack(id);
     return true;
   };
 
-  enable = () => this.setState({ disabled: false });
-  disable = () => this.setState({ disabled: true });
+  lock = () => this.setState({ lock: true });
+  unlock = () => this.setState({ lock: false });
 
   render() {
     const { children, ...props } = this.props;
-    const { disabled } = this.state;
+    const { lock } = this.state;
 
     return (
       <View
         {...props}
         style={{ flex: 1 }}
-        pointerEvents={disabled ? 'none' : 'auto'}
+        pointerEvents={lock ? 'none' : 'auto'}
       >
         {children}
       </View>

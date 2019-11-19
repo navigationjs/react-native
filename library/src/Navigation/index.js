@@ -3,6 +3,8 @@ import Events from '../Events';
 
 export class Navigation {
   static EVENTS = {
+    LOCK: 'lock',
+    UNLOCK: 'unlock',
     WILL_BLUR: 'will_blur',
     BLUR: 'blur',
     WILL_FOCUS: 'will_focus',
@@ -10,21 +12,39 @@ export class Navigation {
     ANDROID_BACK: 'android_back',
   };
 
-  constructor() {
-    this.navigators = {};
-    this.history = [];
-    this.events = new Events();
+  navigators = {};
+  history = [];
+  locked = false;
+  lockCounter = 0;
+  events = new Events();
 
-    // aliases
-    this.on = this.events.on;
-    this.off = this.events.off;
-    this.emit = this.events.emit;
-  }
+  // aliases
+  on = this.events.on;
+  off = this.events.off;
+  emit = this.events.emit;
 
   addNavigators = (...navigators) =>
     navigators.forEach(it => (this.navigators[it.name] = it));
 
+  lock = () => {
+    this.locked = true;
+    this.lockCounter++;
+    this.emit(Navigation.EVENTS.LOCK);
+  };
+
+  unlock = () => {
+    this.lockCounter--;
+    if (this.lockCounter === 0) {
+      this.locked = false;
+      this.emit(Navigation.EVENTS.UNLOCK);
+    }
+  };
+
   go = async (navigatorName, sceneName, duration) => {
+    if (this.locked) return Promise.resolve();
+
+    this.lock();
+
     const prevId = this.id();
     const nextId = toId(navigatorName, sceneName);
 
@@ -53,6 +73,8 @@ export class Navigation {
       });
     }
 
+    this.unlock();
+
     return Promise.resolve();
   };
 
@@ -66,6 +88,10 @@ export class Navigation {
   };
 
   back = async (navigatorName, duration) => {
+    if (this.locked) return Promise.resolve();
+
+    this.lock();
+
     const navigator = this.navigators[navigatorName || this.current()];
     if (!navigator) return Promise.reject();
 
@@ -106,6 +132,8 @@ export class Navigation {
       });
     }
 
+    this.unlock();
+
     return Promise.resolve();
   };
 
@@ -117,6 +145,12 @@ export class Navigation {
   };
 
   current = () => this.history[this.history.length - 1];
+
+  androidBack = id => {
+    this.emit(`${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`, {
+      id,
+    });
+  };
 
   id = () => {
     const currentNavigator = this.current();

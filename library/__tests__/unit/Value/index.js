@@ -1,5 +1,4 @@
-import { Animated, Easing } from 'react-native';
-import navigation from '../../../src/Navigation';
+import { Animated } from 'react-native';
 import Value from '../../../src/Value';
 
 describe('Value', () => {
@@ -37,17 +36,6 @@ describe('Value', () => {
       expect(value._value).toBe(0.5);
       await value.to(1);
       expect(value._value).toBe(1);
-    });
-
-    it('should emit event on start and end of animation', async () => {
-      const value = new Value('value', 0);
-      const start = jest.fn();
-      const end = jest.fn();
-      navigation.on('animation_start:value', start);
-      navigation.on('animation_end:value', end);
-      await value.to(1);
-      expect(start).toBeCalled();
-      expect(end).toBeCalled();
     });
   });
 });

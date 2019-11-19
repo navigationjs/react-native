@@ -16,10 +16,10 @@ describe('AndroidBack', () => {
     const { unmount } = render(
       <AndroidBack id={'example'} onPress={onPress} />
     );
-    await navigation.emit('android_back:example');
+    await navigation.androidBack('example');
     expect(onPress).toHaveBeenCalledTimes(1);
     unmount();
-    await navigation.emit('android_back:example');
+    await navigation.androidBack('example');
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 });
