@@ -45,6 +45,7 @@ describe('Events', () => {
     it('should execute and remove listener after first run', () => {
       const events = new Events();
       const handler = jest.fn();
+      expect.assertions(3);
       expect(events.listeners).toEqual({});
       events.once('hello', handler);
       events.emit('hello');

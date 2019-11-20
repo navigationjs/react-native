@@ -1,6 +1,6 @@
-**Total:** 111
+**Total:** 112
 
-**<span style='color:green'>Passed:</span>** 110
+**<span style='color:green'>Passed:</span>** 111
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -130,6 +130,46 @@
 
 
 
+**Modal Scene**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
+
+**Modal Scene** **.show**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+**Modal Scene** **.hide**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+
+
+**Modal.Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render overlay view if overlay prop passed  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render backgroundColor transparent if transparent prop passed  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove all listeners from scene active on unmount  
+
+**Modal.Wrap** **loading prop**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed and true when hidden  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should pass id and loading props to children if children if function  
+
+
+
 **Events**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a static id method  
@@ -170,54 +210,6 @@
 
 
 
-**AndroidBack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
-
-
-
-**Modal.Wrap**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render overlay view if overlay prop passed  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should render backgroundColor transparent if transparent prop passed  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove all listeners from scene active on unmount  
-
-**Modal.Wrap** **loading prop**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be true by default  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed and true when hidden  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should pass id and loading props to children if children if function  
-
-
-
-**Modal Scene**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
-
-**Modal Scene** **.show**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
-
-**Modal Scene** **.hide**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
-
-
-
 **Wrap**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
@@ -228,9 +220,41 @@
 
 
 
+**Value**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
+
+**Value** **.to**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
+
+
+
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
+
+
+
 **helpers** **fromId**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
+
+
+
+**Stack in Stack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
 
 
 
@@ -284,6 +308,8 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit blur and focus events after go is resolved  
 
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events before navigation is unlocked  
+
 **navigation** **.push**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no such navigator  
@@ -317,28 +343,4 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should clean history  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke reset on each navigator  
-
-
-
-**Stack in Stack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
-
-
-
-**Value**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a animated value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a default easing  
-
-**Value** **.to**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
 

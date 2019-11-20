@@ -20,6 +20,7 @@ export class Navigation {
 
   // aliases
   on = this.events.on;
+  once = this.events.once;
   off = this.events.off;
   emit = this.events.emit;
 
@@ -40,7 +41,7 @@ export class Navigation {
     }
   };
 
-  wait = async () => {
+  wait = () => {
     if (!this.locked) return Promise.resolve();
     return new Promise(resolve => {
       this.once(Navigation.EVENTS.UNLOCK, () => resolve());

@@ -240,6 +240,65 @@ describe('navigation', () => {
         promiseFocus,
       ]);
     });
+
+    it('should emit events before navigation is unlocked', async () => {
+      const navigation = new Navigation();
+      const navigator = new Modal.Navigator('navigator');
+      const scene1 = new Modal.Scene('scene1');
+      const scene2 = new Modal.Scene('scene2');
+      navigator.addScenes(scene1, scene2);
+      navigation.addNavigators(navigator);
+
+      await navigation.go('navigator', 'scene1');
+
+      expect.assertions(8);
+
+      const promiseWillBlur = new Promise(resolve => {
+        navigation.on('will_blur:navigator/scene1', async () => {
+          expect(navigation.locked).toBe(true);
+          navigation.wait().then(() => {
+            expect(navigation.locked).toBe(false);
+          });
+          resolve();
+        });
+      });
+
+      const promiseWillFocus = new Promise(resolve => {
+        navigation.on('will_focus:navigator/scene2', async () => {
+          expect(navigation.locked).toBe(true);
+          await navigation.wait();
+          expect(navigation.locked).toBe(false);
+          resolve();
+        });
+      });
+
+      const promiseBlur = new Promise(resolve => {
+        navigation.on('blur:navigator/scene1', async () => {
+          expect(navigation.locked).toBe(true);
+          await navigation.wait();
+          expect(navigation.locked).toBe(false);
+          resolve();
+        });
+      });
+
+      const promiseFocus = new Promise(resolve => {
+        navigation.on('focus:navigator/scene2', async () => {
+          expect(navigation.locked).toBe(true);
+          await navigation.wait();
+          expect(navigation.locked).toBe(false);
+          resolve();
+        });
+      });
+
+      await navigation.go('navigator', 'scene2');
+
+      await Promise.all([
+        promiseWillBlur,
+        promiseWillFocus,
+        promiseBlur,
+        promiseFocus,
+      ]);
+    });
   });
 
   describe('.push', () => {
@@ -278,7 +337,7 @@ describe('navigation', () => {
   describe('.wait', () => {
     it('should resolves when navigation is unlocked', async () => {
       const navigation = new Navigation();
-      expect.assertions(1);
+      expect.assertions(3);
       expect(navigation.wait()).resolves.toBeUndefined();
       navigation.lock();
       const promise = navigation.wait();
