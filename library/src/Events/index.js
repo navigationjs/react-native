@@ -14,11 +14,21 @@ export default class Events {
     this.listeners[name].push({ id, fn });
   };
 
-  off = eventId => {
+  once = (eventId, fn) => {
+    const handler = () => {
+      fn();
+      this.off(eventId, handler);
+    };
+    this.on(eventId, handler);
+  };
+
+  off = (eventId, fn) => {
     const [name, id] = this.parse(eventId);
     if (this.listeners[name] === undefined) return;
-    this.listeners[name] = this.listeners[name].filter(
-      listener => listener.id !== id && id !== Events.ANY
+    this.listeners[name] = this.listeners[name].filter(listener =>
+      !!fn
+        ? !(listener.id === id && fn === listener.fn)
+        : !(listener.id === id || id === Events.ANY)
     );
   };
 

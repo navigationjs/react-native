@@ -40,6 +40,13 @@ export class Navigation {
     }
   };
 
+  wait = async () => {
+    if (!this.locked) return Promise.resolve();
+    return new Promise(resolve => {
+      this.once(Navigation.EVENTS.UNLOCK, () => resolve());
+    });
+  };
+
   go = async (navigatorName, sceneName, duration) => {
     if (this.locked) return Promise.resolve();
 
@@ -60,9 +67,8 @@ export class Navigation {
       });
     }
 
-    this.push(navigatorName);
-
     if (sceneName) await navigator.go(sceneName, duration);
+    this.push(navigatorName);
 
     if (prevId !== nextId) {
       this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {

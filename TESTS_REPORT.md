@@ -1,6 +1,6 @@
-**Total:** 107
+**Total:** 111
 
-**<span style='color:green'>Passed:</span>** 106
+**<span style='color:green'>Passed:</span>** 110
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -130,23 +130,51 @@
 
 
 
-**Modal Scene**
+**Events**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a static id method  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has listeners as an empty object  
 
-**Modal Scene** **.show**
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a sepatator  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has any event  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+**Events** **.on**
 
-**Modal Scene** **.hide**
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add listener with name parsed from eventId  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add any listener  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+**Events** **.once**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should execute and remove listener after first run  
+
+**Events** **.off**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return if no listeners found  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove listener by eventId  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove specific handler it it was provided  
+
+**Events** **.parse**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse eventId into name and id  
+
+**Events** **.emit**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run all listeners with corresponding id  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run all listeners with corresponding event name  
+
+
+
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
 
 
 
@@ -167,6 +195,48 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should be false when scene is showed and true when hidden  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should pass id and loading props to children if children if function  
+
+
+
+**Modal Scene**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
+
+**Modal Scene** **.show**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+**Modal Scene** **.hide**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+
+
+**Wrap**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe to lock and unlock  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events when navigation is locked  
+
+
+
+**helpers** **fromId**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
+
+
+
+**helpers** **toId**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
 
 
 
@@ -210,7 +280,9 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run go on the navigator  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should push navigator to history after go is completed  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit blur and focus events after go is resolved  
 
 **navigation** **.push**
 
@@ -219,6 +291,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to the end  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if it was included  
+
+**navigation** **.wait**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolves when navigation is unlocked  
 
 **navigation** **.back**
 
@@ -244,13 +320,9 @@
 
 
 
-**Wrap**
+**Stack in Stack**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe to lock and unlock  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events when navigation is locked  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
 
 
 
@@ -269,64 +341,4 @@
 **Value** **.to**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
-
-
-
-**Events**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a static id method  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has listeners as an empty object  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a sepatator  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has any event  
-
-**Events** **.on**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add listener with name parsed from eventId  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add any listener  
-
-**Events** **.off**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return if no listeners found  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove listener by eventId  
-
-**Events** **.parse**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse eventId into name and id  
-
-**Events** **.emit**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run all listeners with corresponding id  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run all listeners with corresponding event name  
-
-
-
-**helpers** **fromId**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
-
-
-
-**Stack in Stack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
-
-
-
-**helpers** **toId**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should stringify navigator and scene names  
-
-
-
-**AndroidBack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
 

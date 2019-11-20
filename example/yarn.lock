@@ -748,7 +748,7 @@
     "@types/yargs" "^13.0.0"
 
 "@navigationjs/react-native@../library":
-  version "0.22.0"
+  version "0.23.0"
 
 "@react-native-community/cli-platform-android@^3.0.0-alpha.1", "@react-native-community/cli-platform-android@^3.0.0-alpha.7":
   version "3.0.0-alpha.7"

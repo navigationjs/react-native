@@ -41,6 +41,22 @@ describe('Events', () => {
     });
   });
 
+  describe('.once', () => {
+    it('should execute and remove listener after first run', () => {
+      const events = new Events();
+      const handler = jest.fn();
+      expect(events.listeners).toEqual({});
+      events.once('hello', handler);
+      events.emit('hello');
+      expect(events.listeners).toEqual({
+        hello: [],
+      });
+      events.emit('hello');
+      events.emit('hello');
+      expect(handler).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('.off', () => {
     it('should return if no listeners found', () => {
       const events = new Events();
@@ -83,6 +99,35 @@ describe('Events', () => {
 
       events.off('blur');
       expect(events.listeners.blur).toEqual([]);
+    });
+
+    it('should remove specific handler it it was provided', () => {
+      const events = new Events();
+      const handler1 = jest.fn();
+      const handler2 = jest.fn();
+      events.on('hello', handler1);
+      events.on('hello', handler2);
+      expect(events.listeners).toEqual({
+        hello: [
+          {
+            id: 'any',
+            fn: handler1,
+          },
+          {
+            id: 'any',
+            fn: handler2,
+          },
+        ],
+      });
+      events.off('hello', handler1);
+      expect(events.listeners).toEqual({
+        hello: [
+          {
+            id: 'any',
+            fn: handler2,
+          },
+        ],
+      });
     });
   });
 
