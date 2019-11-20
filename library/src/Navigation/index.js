@@ -99,7 +99,8 @@ export class Navigation {
 
     this.lock();
 
-    const navigator = this.navigators[navigatorName || this.current()];
+    if (navigatorName) this.push(navigatorName);
+    const navigator = this.navigators[this.current()];
     if (!navigator) return Promise.reject();
 
     const prevId = this.id();

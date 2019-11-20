@@ -256,7 +256,7 @@ describe('navigation', () => {
       const promiseWillBlur = new Promise(resolve => {
         navigation.on('will_blur:navigator/scene1', async () => {
           expect(navigation.locked).toBe(true);
-          await navigation.wait()
+          await navigation.wait();
           expect(navigation.locked).toBe(false);
           resolve();
         });
@@ -392,6 +392,25 @@ describe('navigation', () => {
       expect(navigator.back).toHaveBeenCalledTimes(1);
     });
 
+    it('should push navigator name if it was provided', async () => {
+      const navigation = new Navigation();
+      const navigator1 = new Modal.Navigator('navigator1');
+      const navigator2 = new Modal.Navigator('navigator2');
+      const scene1 = new Modal.Scene('scene1');
+      const scene2 = new Modal.Scene('scene2');
+      const scene3 = new Modal.Scene('scene3');
+      navigator1.addScenes(scene1, scene2);
+      navigator2.addScenes(scene3);
+      navigation.addNavigators(navigator1, navigator2);
+      await navigation.go('navigator1', 'scene1');
+      await navigation.go('navigator1', 'scene2');
+      await navigation.go('navigator2', 'scene3');
+      expect(navigation.history).toEqual(['navigator1', 'navigator2']);
+      await navigation.back('navigator1');
+      expect(navigation.history).toEqual(['navigator2', 'navigator1']);
+      expect(navigator1.history).toEqual(['scene1']);
+    });
+
     it('should remove navigator from history if navigator history is empty', async () => {
       const navigation = new Navigation();
       const navigator = new Modal.Navigator('navigator');
@@ -522,7 +541,7 @@ describe('navigation', () => {
       const promiseWillBlur = new Promise(resolve => {
         navigation.on('will_blur:navigator/scene2', async () => {
           expect(navigation.locked).toBe(true);
-          await navigation.wait()
+          await navigation.wait();
           expect(navigation.locked).toBe(false);
           resolve();
         });
