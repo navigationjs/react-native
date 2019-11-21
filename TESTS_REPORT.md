@@ -56,27 +56,11 @@
 
 
 
-**Stack Scene**
+**Navigation** **.reset**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should clean history  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active and depth  
-
-**Stack Scene** **.show**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active and depth values  
-
-**Stack Scene** **.hide**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active and depth values  
-
-**Stack Scene** **.dive**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change depth value  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke reset on each navigator  
 
 
 
@@ -130,26 +114,6 @@
 
 
 
-**Modal Scene**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
-
-**Modal Scene** **.show**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
-
-**Modal Scene** **.hide**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
-
-
-
 **Modal.Wrap**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
@@ -170,6 +134,72 @@
 
 
 
+**Navigation** **.back**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve immediately if navigation is locked  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should lock navigation immediately and unlock at the end  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve if history is empty  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call back on the navigator  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should push navigator name if it was provided  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if navigator history is empty  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit will_blur, will_focus, blur and focus events  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit will_blur and blur events  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events before navigation is unlocked  
+
+
+
+**Modal Scene**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active  
+
+**Modal Scene** **.show**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+**Modal Scene** **.hide**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active value  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+
+
+**Stack Scene**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a name  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has value active and depth  
+
+**Stack Scene** **.show**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active and depth values  
+
+**Stack Scene** **.hide**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke .to method on value with provided duration  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change active and depth values  
+
+**Stack Scene** **.dive**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change depth value  
+
+
+
 **Wrap**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
@@ -180,11 +210,25 @@
 
 
 
-**AndroidBack**
+**Navigation** **.go**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve immediately if navigation is locked  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should lock navigation immediately and unlock at the end  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if there is no such navigator  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to history  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should move navigator to the end in history if it is already exist  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run go on the navigator  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should push navigator to history after go is completed  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit blur and focus events after go is resolved  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events before navigation is unlocked  
 
 
 
@@ -203,6 +247,48 @@
 **Value** **.to**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should change values on `to` method  
+
+
+
+**Navigation** **.wait**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolves when navigation is unlocked  
+
+
+
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
+
+
+
+**navigation**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a navigators as an empty object  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has static EVENTS list  
+
+
+
+**Navigation** **.push**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no such navigator  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to the end  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if it was included  
+
+
+
+**Navigation** **.lock**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set locked to true  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set increment lock counter  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit lock event  
 
 
 
@@ -246,9 +332,13 @@
 
 
 
-**helpers** **fromId**
+**Navigation** **.unlock**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set decrement locked counter  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set locked to false if counter is 0  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit unlock event if counter is 0  
 
 
 
@@ -258,93 +348,19 @@
 
 
 
-**Stack in Stack**
+**helpers** **fromId**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should parse id into array of navigator and scene  
 
 
 
-**navigation**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has a navigators as an empty object  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should has static EVENTS list  
-
-**navigation** **.addNavigators**
+**Navigation** **.addNavigators**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigators by their names  
 
-**navigation** **.lock**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set locked to true  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set increment lock counter  
+**Stack in Stack**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit lock event  
-
-**navigation** **.unlock**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set decrement locked counter  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should set locked to false if counter is 0  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit unlock event if counter is 0  
-
-**navigation** **.go**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve immediately if navigation is locked  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should lock navigation immediately and unlock at the end  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if there is no such navigator  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to history  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should move navigator to the end in history if it is already exist  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should run go on the navigator  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should push navigator to history after go is completed  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit blur and focus events after go is resolved  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events before navigation is unlocked  
-
-**navigation** **.push**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no such navigator  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add navigator to the end  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if it was included  
-
-**navigation** **.wait**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolves when navigation is unlocked  
-
-**navigation** **.back**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve immediately if navigation is locked  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should lock navigation immediately and unlock at the end  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve if history is empty  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call back on the navigator  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should push navigator name if it was provided  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should remove navigator from history if navigator history is empty  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit will_blur, will_focus, blur and focus events  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit will_blur and blur events  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should emit events before navigation is unlocked  
-
-**navigation** **.reset**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should clean history  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke reset on each navigator  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:grey'>–</span> should  
 
