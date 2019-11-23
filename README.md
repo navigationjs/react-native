@@ -8,7 +8,6 @@
 [![build][bitrise-badge]][bitrise]
 
 
-
 ## LICENSE
 
 MIT
@@ -21,7 +20,7 @@ MIT
 [license]: https://github.com/navigationjs/react-native/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
-[bitrise-badge]: https://app.bitrise.io/app/4f43d4501d407a01/status.svg?token=xDgy1h3gbKqv-iY1px8Vjw&branch=master
+[bitrise-badge]: https://img.shields.io/bitrise/4f43d4501d407a01?label=build&style=flat-square&token=xDgy1h3gbKqv-iY1px8Vjw
 [bitrise]: https://app.bitrise.io/app/4f43d4501d407a01
 [codecov]: https://codecov.io/gh/navigationjs/react-native
-[codecov-badge]: https://codecov.io/gh/navigationjs/react-native/branch/master/graph/badge.svg
+[codecov-badge]: https://img.shields.io/codecov/c/github/navigationjs/react-native.svg?style=flat-square
