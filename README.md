@@ -2,9 +2,11 @@
 
 [![downloads][downloads-badge]][npmcharts]
 [![version][version-badge]][package]
-[![MIT License][license-badge]][license]
+[![license][license-badge]][license]
+[![coverage][codecov-badge]][codecov]
 [![PRs Welcome][prs-badge]][prs]
-[![Build Status][bitrise-badge]][bitrise]
+[![build][bitrise-badge]][bitrise]
+
 
 
 ## LICENSE
@@ -21,3 +23,5 @@ MIT
 [prs]: http://makeapullrequest.com
 [bitrise-badge]: https://app.bitrise.io/app/4f43d4501d407a01/status.svg?token=xDgy1h3gbKqv-iY1px8Vjw&branch=master
 [bitrise]: https://app.bitrise.io/app/4f43d4501d407a01
+[codecov]: https://codecov.io/gh/navigationjs/react-native
+[codecov-badge]: https://codecov.io/gh/navigationjs/react-native/branch/master/graph/badge.svg
