@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import events from '@railsmob/events';
 import { render } from '@testing-library/react-native';
 import Wrap from '../../../src/Wrap';
 import navigation from '../../../src/Navigation';
@@ -15,7 +16,7 @@ describe('Wrap', () => {
   });
 
   it('should subscribe to lock and unlock', async () => {
-    navigation.events.listeners = {};
+    events.listeners = {};
 
     const { unmount } = render(
       <Wrap testID={'wrap'}>
@@ -23,16 +24,16 @@ describe('Wrap', () => {
       </Wrap>
     );
 
-    expect(navigation.events.listeners).toEqual({
-      lock: [{ id: 'any', fn: expect.any(Function) }],
-      unlock: [{ id: 'any', fn: expect.any(Function) }],
+    expect(events.listeners).toEqual({
+      navigation_lock: [{ id: 'any', fn: expect.any(Function) }],
+      navigation_unlock: [{ id: 'any', fn: expect.any(Function) }],
     });
 
     unmount();
 
-    expect(navigation.events.listeners).toEqual({
-      lock: [],
-      unlock: [],
+    expect(events.listeners).toEqual({
+      navigation_lock: [],
+      navigation_unlock: [],
     });
   });
 
@@ -44,9 +45,9 @@ describe('Wrap', () => {
     );
     const component = getByTestId('wrap');
     expect(component.props.pointerEvents).toBe('auto');
-    navigation.events.emit('lock');
+    navigation.emit('lock');
     expect(component.props.pointerEvents).toBe('none');
-    navigation.events.emit('unlock');
+    navigation.emit('unlock');
     expect(component.props.pointerEvents).toBe('auto');
   });
 });

@@ -1,5 +1,5 @@
+import events from '@railsmob/events';
 import { toId } from '../helpers';
-import Events from '../Events';
 
 export class Navigation {
   static EVENTS = {
@@ -16,13 +16,12 @@ export class Navigation {
   history = [];
   locked = false;
   lockCounter = 0;
-  events = new Events();
 
   // aliases
-  on = this.events.on;
-  once = this.events.once;
-  off = this.events.off;
-  emit = this.events.emit;
+  on = (eventId, ...other) => events.on(`navigation_${eventId}`, ...other);
+  once = (eventId, ...other) => events.once(`navigation_${eventId}`, ...other);
+  off = (eventId, ...other) => events.off(`navigation_${eventId}`, ...other);
+  emit = (eventId, ...other) => events.emit(`navigation_${eventId}`, ...other);
 
   addNavigators = (...navigators) =>
     navigators.forEach(it => (this.navigators[it.name] = it));
@@ -60,10 +59,10 @@ export class Navigation {
     if (!navigator) return Promise.reject();
 
     if (prevId !== nextId) {
-      this.emit(Events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
+      this.emit(events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
         id: prevId,
       });
-      this.emit(Events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
+      this.emit(events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
         id: nextId,
       });
     }
@@ -72,10 +71,10 @@ export class Navigation {
     this.push(navigatorName);
 
     if (prevId !== nextId) {
-      this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
+      this.emit(events.id(Navigation.EVENTS.BLUR, prevId), {
         id: prevId,
       });
-      this.emit(Events.id(Navigation.EVENTS.FOCUS, nextId), {
+      this.emit(events.id(Navigation.EVENTS.FOCUS, nextId), {
         id: nextId,
       });
     }
@@ -105,7 +104,7 @@ export class Navigation {
 
     const prevId = this.id();
 
-    this.emit(Events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
+    this.emit(events.id(Navigation.EVENTS.WILL_BLUR, prevId), {
       id: prevId,
     });
 
@@ -122,7 +121,7 @@ export class Navigation {
       : null;
 
     if (nextId) {
-      this.emit(Events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
+      this.emit(events.id(Navigation.EVENTS.WILL_FOCUS, nextId), {
         id: nextId,
       });
     }
@@ -130,12 +129,12 @@ export class Navigation {
     await navigator.back(duration);
     if (navigator.history.length === 0) this.history.pop();
 
-    this.emit(Events.id(Navigation.EVENTS.BLUR, prevId), {
+    this.emit(events.id(Navigation.EVENTS.BLUR, prevId), {
       id: prevId,
     });
 
     if (nextId) {
-      this.emit(Events.id(Navigation.EVENTS.FOCUS, nextId), {
+      this.emit(events.id(Navigation.EVENTS.FOCUS, nextId), {
         id: nextId,
       });
     }
@@ -155,7 +154,7 @@ export class Navigation {
   current = () => this.history[this.history.length - 1];
 
   androidBack = id => {
-    this.emit(`${Navigation.EVENTS.ANDROID_BACK}${Events.SEP}${id}`, {
+    this.emit(`${Navigation.EVENTS.ANDROID_BACK}${events.SEP}${id}`, {
       id,
     });
   };

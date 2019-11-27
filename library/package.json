@@ -1,6 +1,6 @@
 {
   "name": "@navigationjs/react-native",
-  "version": "0.23.2",
+  "version": "0.24.0",
   "description": "Simple and well-tested React Native navigation",
   "main": "index.js",
   "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
@@ -40,6 +40,12 @@
   "jest": {
     "preset": "@testing-library/react-native",
     "testEnvironment": "node",
-    "reporters": ["default", "../reporter.js"]
+    "reporters": [
+      "default",
+      "../reporter.js"
+    ]
+  },
+  "dependencies": {
+    "@railsmob/events": "^0.1.3"
   }
 }

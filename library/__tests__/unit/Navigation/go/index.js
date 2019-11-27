@@ -1,7 +1,10 @@
 import { Navigation } from '../../../../src/Navigation';
 import Modal from '../../../../src/Modal';
+import events from '@railsmob/events';
 
 describe('Navigation', () => {
+  beforeEach(() => (events.listeners = {}));
+
   describe('.go', () => {
     it('should resolve immediately if navigation is locked', () => {
       const navigation = new Navigation();
