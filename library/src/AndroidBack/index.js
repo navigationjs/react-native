@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import events from '@railsmob/events';
-import navigation, { Navigation } from '../Navigation';
+import navigation, { Navigation } from '@navigationjs/core';
 
 export default class AndroidBack extends Component {
   componentDidMount() {

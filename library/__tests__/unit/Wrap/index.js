@@ -2,8 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import events from '@railsmob/events';
 import { render } from '@testing-library/react-native';
+import navigation from '@navigationjs/core';
 import Wrap from '../../../src/Wrap';
-import navigation from '../../../src/Navigation';
 
 describe('Wrap', () => {
   it('should match snapshot', async () => {

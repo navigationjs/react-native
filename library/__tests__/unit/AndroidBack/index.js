@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
+import navigation from '@navigationjs/core';
 import AndroidBack from '../../../src/AndroidBack';
-import navigation from '../../../src/Navigation';
 
 describe('AndroidBack', () => {
   it('should match snapshot', async () => {

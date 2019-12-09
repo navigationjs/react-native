@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Animated, Dimensions, Platform } from 'react-native';
-import { toId } from '../helpers';
-import navigation from '../Navigation';
+import { Animated, Dimensions } from 'react-native';
+import navigation, { toId } from '@navigationjs/core';
 
 export default class Wrap extends Component {
   constructor(props) {
