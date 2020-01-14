@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
-import navigation, { Navigation } from '@navigationjs/core';
+import navigation from '@navigationjs/core';
 
 export default class Wrap extends Component {
   state = { lock: false };
 
   componentDidMount() {
-    navigation.on(Navigation.EVENTS.LOCK, () => this.lock());
-    navigation.on(Navigation.EVENTS.UNLOCK, () => this.unlock());
+    navigation.on('lock', () => this.lock());
+    navigation.on('unlock', () => this.unlock());
 
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -16,14 +16,14 @@ export default class Wrap extends Component {
   }
 
   componentWillUnmount() {
-    navigation.off(Navigation.EVENTS.LOCK);
-    navigation.off(Navigation.EVENTS.UNLOCK);
+    navigation.off('lock');
+    navigation.off('unlock');
     this.backHandler.remove();
   }
 
   handleBackPress = () => {
     const id = navigation.id();
-    if (id) navigation.androidBack(id);
+    if (id) navigation.emit('android_back', id);
     return true;
   };
 

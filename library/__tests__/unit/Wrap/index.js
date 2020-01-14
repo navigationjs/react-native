@@ -15,7 +15,7 @@ describe('Wrap', () => {
     expect(baseElement).toMatchSnapshot();
   });
 
-  it('should subscribe to lock and unlock', async () => {
+  it.skip('should subscribe to lock and unlock', async () => {
     events.listeners = {};
 
     const { unmount } = render(
