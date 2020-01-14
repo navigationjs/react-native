@@ -23,7 +23,7 @@ export default class Wrap extends Component {
 
   handleBackPress = () => {
     const id = navigation.id();
-    if (id) navigation.emit('android_back', id);
+    if (id) navigation.emit(`android_back:${id}`);
     return true;
   };
 
