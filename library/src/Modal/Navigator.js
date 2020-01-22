@@ -1,8 +1,10 @@
+import { History } from '@navigationjs/core';
+
 export default class Navigator {
   constructor(name) {
     this.name = name;
     this.scenes = {};
-    this.history = [];
+    this.history = new History(this.name);
   }
 
   addScenes = (...scenes) => {
@@ -13,19 +15,19 @@ export default class Navigator {
     scenes.forEach(it => delete this.scenes[it]);
   };
 
-  current = () => this.history[this.history.length - 1];
+  current = () => this.history.current();
 
   go = async (name, duration) => {
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
-    const alreadyInHistory = this.history.includes(name);
+    const alreadyInHistory = this.history.current() === name;
     if (alreadyInHistory) return Promise.resolve();
     await scene.show(duration);
     this.history.push(name);
   };
 
   back = async duration => {
-    if (this.history.length === 0) return Promise.resolve();
+    if (this.history.isEmpty()) return Promise.resolve();
     const name = this.current();
     const scene = this.scenes[name];
     if (!scene) return Promise.reject();
@@ -37,6 +39,6 @@ export default class Navigator {
     await Promise.all(
       Object.keys(this.scenes).map(key => this.scenes[key].hide(0))
     );
-    this.history = [];
+    this.history = new History(this.name);
   };
 }

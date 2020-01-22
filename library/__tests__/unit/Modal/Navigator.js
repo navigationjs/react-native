@@ -13,7 +13,7 @@ describe('Modal.Navigator', () => {
 
   it('should has an empty history array', () => {
     const navigator = new Modal.Navigator('navigator');
-    expect(navigator.history).toEqual([]);
+    expect(navigator.history.isEmpty()).toBeTruthy();
   });
 
   describe('.addScenes', () => {
@@ -42,10 +42,11 @@ describe('Modal.Navigator', () => {
   });
 
   describe('.current', () => {
-    it('should return last item from history', () => {
+    it('should call current from history', () => {
       const navigator = new Modal.Navigator('navigator');
-      navigator.history = ['first', 'second'];
-      expect(navigator.current()).toBe('second');
+      navigator.history.current = jest.fn();
+      navigator.current();
+      expect(navigator.history.current).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -62,16 +63,6 @@ describe('Modal.Navigator', () => {
       }
     });
 
-    it('should not add scene if it is already in history', async () => {
-      const navigator = new Modal.Navigator('navigator');
-      navigator.addScenes(new Modal.Scene('scene'));
-      expect(navigator.history).toEqual([]);
-      await navigator.go('scene');
-      expect(navigator.history).toEqual(['scene']);
-      await navigator.go('scene');
-      expect(navigator.history).toEqual(['scene']);
-    });
-
     it('should invoke show on scene with provided duration', async () => {
       const navigator = new Modal.Navigator('navigator');
       const scene = new Modal.Scene('scene');
@@ -81,22 +72,14 @@ describe('Modal.Navigator', () => {
       expect(scene.show).toBeCalledWith(100);
     });
 
-    it('should add scene into history', async () => {
-      const navigator = new Modal.Navigator('navigator');
-      navigator.addScenes(new Modal.Scene('scene'));
-      expect(navigator.history).toEqual([]);
-      await navigator.go('scene');
-      expect(navigator.history).toEqual(['scene']);
-    });
-
     it('should add scene after animation is done', async () => {
       const navigator = new Modal.Navigator('navigator');
       navigator.addScenes(new Modal.Scene('scene'));
       expect.assertions(2);
       const promise = navigator.go('scene');
-      expect(navigator.history).toEqual([]);
+      expect(navigator.history.isEmpty()).toBeTruthy();
       await promise;
-      expect(navigator.history).toEqual(['scene']);
+      expect(navigator.history.chain).toEqual(['scene']);
     });
   });
 
@@ -104,23 +87,11 @@ describe('Modal.Navigator', () => {
     it('should resolve if history is empty', async () => {
       const navigator = new Modal.Navigator('navigator');
       expect.assertions(1);
-      expect(navigator.history).toEqual([]);
+      expect(navigator.history.isEmpty()).toBeTruthy();
       try {
         await navigator.back();
       } catch (e) {
         expect(e).toEqual(expect.anything());
-      }
-    });
-
-    it('should reject if no such scene exists', async () => {
-      const navigator = new Modal.Navigator('navigator');
-      navigator.history = ['anything'];
-      expect.assertions(1);
-
-      try {
-        await navigator.back();
-      } catch (e) {
-        expect(e).toBeUndefined();
       }
     });
 
@@ -141,9 +112,9 @@ describe('Modal.Navigator', () => {
       await navigator.go('scene');
       expect.assertions(2);
       const promise = navigator.back();
-      expect(navigator.history).toEqual(['scene']);
+      expect(navigator.history.chain).toEqual(['scene']);
       await promise;
-      expect(navigator.history).toEqual([]);
+      expect(navigator.history.isEmpty).toBeTruthy();
     });
   });
 
@@ -170,9 +141,9 @@ describe('Modal.Navigator', () => {
       await navigator.go('scene1');
       await navigator.go('scene2');
       const promise = navigator.reset();
-      expect(navigator.history).toEqual(['scene1', 'scene2']);
+      expect(navigator.history.chain).toEqual(['scene1', 'scene2']);
       await promise;
-      expect(navigator.history).toEqual([]);
+      expect(navigator.history.isEmpty()).toBeTruthy();
     });
   });
 });

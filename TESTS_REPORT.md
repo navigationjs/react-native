@@ -1,6 +1,6 @@
-**Total:** 67
+**Total:** 62
 
-**<span style='color:green'>Passed:</span>** 66
+**<span style='color:green'>Passed:</span>** 61
 
 **<span style='color:red'>Failed:</span>** 0
 
@@ -48,25 +48,19 @@
 
 **Modal.Navigator** **.current**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return last item from history  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call current from history  
 
 **Modal.Navigator** **.go**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no scene exists  
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should not add scene if it is already in history  
-
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke show on scene with provided duration  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scene into history  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should add scene after animation is done  
 
 **Modal.Navigator** **.back**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve if history is empty  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no such scene exists  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke scene hide with provided duration  
 
@@ -142,6 +136,14 @@
 
 
 
+**AndroidBack**
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
+
+
+
 **Wrap**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
@@ -149,14 +151,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:orange'>–</span> should subscribe to lock and unlock  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should disable pointer events when navigation is locked  
-
-
-
-**AndroidBack**
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should match snapshot  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should subscribe onPress to android_back event  
 
 
 
@@ -178,13 +172,11 @@
 
 **Stack.Navigator** **.current**
 
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should return last item from history  
+&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should call current from history  
 
 **Stack.Navigator** **.go**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no scene exists  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should not add scene if it is already in history  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should dive all scenes in history on one level  
 
@@ -197,8 +189,6 @@
 **Stack.Navigator** **.back**
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should resolve if history is empty  
-
-&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should reject if no such scene exists  
 
 &nbsp;&nbsp;&nbsp;&nbsp;<span style='color:green'>✓</span> should invoke scene hide with provided duration  
 
