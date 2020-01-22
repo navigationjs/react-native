@@ -785,9 +785,9 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@navigationjs/core@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@navigationjs/core/-/core-0.4.0.tgz#62424b4999acca90a1f06f6801fe78c846968faa"
+"@navigationjs/core@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@navigationjs/core/-/core-0.5.1.tgz#b900c0ad550b2c249d4d10b9fc248c5cbc54b920"
   dependencies:
     "@railsmob/events" "^0.1.11"
 

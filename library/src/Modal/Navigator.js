@@ -9,6 +9,10 @@ export default class Navigator {
     scenes.forEach(it => (this.scenes[it.name] = it));
   };
 
+  removeScenes = (...scenes) => {
+    scenes.forEach(it => delete this.scenes[it]);
+  };
+
   current = () => this.history[this.history.length - 1];
 
   go = async (name, duration) => {

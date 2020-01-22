@@ -26,6 +26,21 @@ describe('Modal.Navigator', () => {
     });
   });
 
+  describe('.removeScenes', () => {
+    it('should remove scenes by names', () => {
+      const navigator = new Modal.Navigator('navigator');
+      const first = new Modal.Scene('first');
+      const second = new Modal.Scene('second');
+      const third = new Modal.Scene('third');
+      navigator.addScenes(first, second, third);
+      expect(navigator.scenes).toEqual({ first, second, third });
+      navigator.removeScenes('first');
+      expect(navigator.scenes).toEqual({ second, third });
+      navigator.removeScenes('second', 'third');
+      expect(navigator.scenes).toEqual({});
+    });
+  });
+
   describe('.current', () => {
     it('should return last item from history', () => {
       const navigator = new Modal.Navigator('navigator');
