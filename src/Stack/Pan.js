@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, PanResponder } from 'react-native';
-import navigation from '@navigationjs/core';
+import navigation, { fromId } from '@navigationjs/core';
 
 export default class Pan extends Component {
   static defaultProps = {
@@ -29,14 +29,9 @@ export default class Pan extends Component {
   };
 
   onPanEnd = async event => {
-    const {
-      navigator: navigatorName,
-      scene: sceneName,
-      percentThreshold,
-      velocityThreshold,
-      onSwipe,
-    } = this.props;
+    const { id, percentThreshold, velocityThreshold, onSwipe } = this.props;
 
+    const [navigatorName, sceneName] = fromId(id);
     const navigator = navigation.navigators[navigatorName];
     const scene = navigator.scenes[sceneName];
 
@@ -62,8 +57,8 @@ export default class Pan extends Component {
   };
 
   onPanMove = (event, gestureState) => {
-    const { navigator: navigatorName, scene: sceneName } = this.props;
-
+    const { id } = this.props;
+    const [navigatorName, sceneName] = fromId(id);
     const navigator = navigation.navigators[navigatorName];
     const scene = navigator.scenes[sceneName];
 
@@ -115,6 +110,7 @@ export default class Pan extends Component {
       percentThreshold,
       size,
       sensitivity,
+      id,
       ...other
     } = this.props;
     return (
