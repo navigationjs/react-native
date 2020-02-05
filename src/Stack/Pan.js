@@ -17,9 +17,7 @@ export default class Pan extends Component {
   onPanCheck = (event, gestureState) => {
     const { disabled, sensitivity, size } = this.props;
     if (disabled || navigation.locked) return false;
-    const sensitivityCheck =
-      Math.abs(gestureState.dx) > sensitivity &&
-      Math.abs(gestureState.dy) <= sensitivity;
+    const sensitivityCheck = gestureState.dx > sensitivity;
     const sizeCheck = event.nativeEvent.pageX < this.width * size;
     return sensitivityCheck && sizeCheck;
   };
