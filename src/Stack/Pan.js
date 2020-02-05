@@ -5,7 +5,7 @@ import navigation, { fromId } from '@navigationjs/core';
 export default class Pan extends Component {
   static defaultProps = {
     sensitivity: 30,
-    velocityThreshold: 200,
+    velocityThreshold: 0.5,
     percentThreshold: 0.3,
     size: 0.35,
     component: View,
@@ -22,11 +22,7 @@ export default class Pan extends Component {
     return sensitivityCheck && sizeCheck;
   };
 
-  onPanStart = event => {
-    this.timeStart = event.nativeEvent.timestamp;
-  };
-
-  onPanEnd = async event => {
+  onPanTerminateOrRelease = async (event, gestureState) => {
     const { id, percentThreshold, velocityThreshold, onSwipe } = this.props;
 
     const [navigatorName, sceneName] = fromId(id);
@@ -39,9 +35,8 @@ export default class Pan extends Component {
       ];
     this.value = scene.active._value;
 
-    const velocityThresholdMet =
-      event.nativeEvent.timestamp - this.timeStart < velocityThreshold;
     const percentThresholdMet = this.value < 1 - percentThreshold;
+    const velocityThresholdMet = gestureState.vx > velocityThreshold;
     const thresholdMet = velocityThresholdMet || percentThresholdMet;
 
     if (thresholdMet && onSwipe) onSwipe();
@@ -75,14 +70,13 @@ export default class Pan extends Component {
   };
 
   panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => false,
-    onStartShouldSetPanResponderCapture: () => false,
-    onMoveShouldSetPanResponder: () => false,
+    onStartShouldSetPanResponder: this.onPanCheck,
+    onStartShouldSetPanResponderCapture: this.onPanCheck,
+    onMoveShouldSetPanResponder: this.onPanCheck,
     onMoveShouldSetPanResponderCapture: this.onPanCheck,
-    onPanResponderGrant: this.onPanStart,
     onPanResponderMove: this.onPanMove,
-    onPanResponderRelease: this.onPanEnd,
-    onPanResponderTerminate: this.onPanEnd,
+    onPanResponderRelease: this.onPanTerminateOrRelease,
+    onPanResponderTerminate: this.onPanTerminateOrRelease,
     onPanResponderTerminationRequest: () => false,
     onShouldBlockNativeResponder: () => true,
   });
@@ -111,6 +105,7 @@ export default class Pan extends Component {
       id,
       ...other
     } = this.props;
+
     return (
       <WrapComponent
         {...other}
