@@ -1,28 +1,19 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Dimensions } from 'react-native';
 import navigation, { fromId } from '@navigationjs/core';
 
-export default class Swipe extends Component {
-  state = {
-    width: 0,
-    height: 0,
-  };
+const { width, height } = Dimensions.get('window');
 
+export default class Swipe extends Component {
   scrollingTo = null;
   index = 1;
 
   render() {
     const { disabled, children } = this.props;
-    const { width, height } = this.state;
 
     return (
       <ScrollView
-        automaticallyAdjustContentInsets={false}
         ref={c => (this.scrollView = c)}
-        style={{
-          flex: 1,
-          backgroundColor: 'transparent',
-        }}
         scrollEnabled={!disabled}
         horizontal={true}
         pagingEnabled={true}
@@ -36,7 +27,8 @@ export default class Swipe extends Component {
         directionalLockEnabled={true}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        onLayout={this.adjustCardSize}
+        onLayout={this.reset}
+        overScrollMode={'never'}
       >
         <View style={{ width, height }} />
         <View style={{ width, height }}>{children}</View>
@@ -50,25 +42,16 @@ export default class Swipe extends Component {
       const [navigatorName, sceneName] = fromId(id);
       const navigator = navigation.navigators[navigatorName];
       const scene = navigator.scenes[sceneName];
-      scene.active.to(0, 0);
+      scene.hide(0);
       onSwipe && onSwipe();
       this.reset();
     }
   };
 
-  adjustCardSize = ({
-    nativeEvent: {
-      layout: { width, height },
-    },
-  }) => {
-    this.setState({ width, height });
-    setTimeout(this.reset, 0);
-  };
-
   reset = () => {
     this.index = 1;
     this.scrollView.scrollTo({
-      x: this.state.width,
+      x: width,
       animated: false,
     });
   };
@@ -91,7 +74,7 @@ export default class Swipe extends Component {
   };
 
   handleHorizontalScroll = e => {
-    const offset = e.nativeEvent.contentOffset.x / this.state.width;
+    const offset = e.nativeEvent.contentOffset.x / width;
 
     const selectedIndex = Math.round(offset);
 
