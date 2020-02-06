@@ -61,7 +61,7 @@ export default class Wrap extends Component {
             position: 'absolute',
             width: '100%',
             height: '100%',
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
             overflow: 'hidden',
           },
           {

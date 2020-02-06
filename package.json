@@ -1,6 +1,6 @@
 {
   "name": "@navigationjs/react-native",
-  "version": "0.31.0",
+  "version": "0.31.1",
   "description": "Simple and well-tested React Native navigation",
   "main": "index.js",
   "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
