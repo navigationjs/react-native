@@ -6,7 +6,11 @@ const { width, height } = Dimensions.get('window');
 
 export default class Swipe extends Component {
   scrollingTo = null;
-  index = 1;
+  index = 0;
+
+  componentDidMount() {
+    setTimeout(this.reset, 0);
+  }
 
   render() {
     const { disabled, children } = this.props;
@@ -27,7 +31,6 @@ export default class Swipe extends Component {
         directionalLockEnabled={true}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        onLayout={this.reset}
         overScrollMode={'never'}
       >
         <View style={{ width, height }} />
