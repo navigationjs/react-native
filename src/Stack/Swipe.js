@@ -7,6 +7,8 @@ const { width, height } = Dimensions.get('window');
 export default class Swipe extends Component {
   scrollingTo = null;
   index = 0;
+  dragging = false;
+  locked = false;
 
   componentDidMount() {
     setTimeout(this.reset, 0);
@@ -23,8 +25,10 @@ export default class Swipe extends Component {
         pagingEnabled={true}
         bounces={false}
         scrollsToTop={false}
+        onScrollBeginDrag={this.onScrollBeginDrag}
+        onScrollEndDrag={this.onScrollEndDrag}
         onScroll={this.handleHorizontalScroll}
-        onMomentumScrollEnd={this.onMomentumScrollEnd}
+        onMomentumScrollEnd={this.onEnd}
         scrollEventThrottle={16}
         removeClippedSubviews={false}
         automaticallyAdjustContentInsets={false}
@@ -39,25 +43,36 @@ export default class Swipe extends Component {
     );
   }
 
-  onMomentumScrollEnd = async () => {
-    if (this.index === 0) {
-      const { id, onSwipe } = this.props;
-      const [navigatorName, sceneName] = fromId(id);
-      const navigator = navigation.navigators[navigatorName];
-      const scene = navigator.scenes[sceneName];
-      scene.hide(0);
-      onSwipe && onSwipe();
-      this.reset();
+  onEnd = async () => {
+    if (this.index !== 0) return;
+    if (this.locked) return;
+    this.locked = true;
+
+    const { id, onSwipe } = this.props;
+    const [navigatorName, sceneName] = fromId(id);
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+    if (scene.active._value === 0) {
+      this.locked = false;
+      return;
     }
+    await scene.hide(0);
+    onSwipe && (await onSwipe());
+    this.reset();
+    this.locked = false;
   };
 
   reset = () => {
     this.index = 1;
-    this.scrollView.scrollTo({
-      x: width,
-      animated: false,
-    });
+    this.scrollView &&
+      this.scrollView.scrollTo({
+        x: width,
+        animated: false,
+      });
   };
+
+  onScrollBeginDrag = () => (this.dragging = true);
+  onScrollEndDrag = () => (this.dragging = false);
 
   animatePrevScene = value => {
     const { id } = this.props;
@@ -82,6 +97,8 @@ export default class Swipe extends Component {
     const selectedIndex = Math.round(offset);
 
     this.animatePrevScene(offset);
+
+    if (this.dragging && offset <= 0) this.onEnd();
 
     if (selectedIndex < 0 || selectedIndex >= 2) return;
 
