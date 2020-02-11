@@ -53,6 +53,7 @@ export default class Swipe extends Component {
     const navigator = navigation.navigators[navigatorName];
     const scene = navigator.scenes[sceneName];
     if (scene.active._value === 0) {
+      this.reset();
       this.locked = false;
       return;
     }
