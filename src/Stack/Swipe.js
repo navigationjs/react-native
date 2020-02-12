@@ -87,8 +87,8 @@ export default class Swipe extends Component {
       ];
 
     // TODO: fix Value to not loose listener
-    if (scene && prev && scene.active.value._value > 0) {
-      prev.depth.to(value, 0);
+    if (prev) {
+      prev.depth.to(scene && scene.active.value._value === 1 ? value : 0, 0);
     }
   };
 
