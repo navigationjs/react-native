@@ -41,7 +41,7 @@ describe('Modal.Wrap', () => {
     expect(baseElement).toMatchSnapshot();
   });
 
-  it('should remove all listeners from scene active on unmount', () => {
+  it('should remove listener from scene active on unmount', () => {
     const navigator = new Modal.Navigator('navigator');
     const scene = new Modal.Scene('scene');
     navigator.addScenes(scene);
@@ -54,10 +54,10 @@ describe('Modal.Wrap', () => {
     );
 
     scene.active.value = {
-      removeAllListeners: jest.fn(),
+      removeListener: jest.fn(),
     };
     unmount();
-    expect(scene.active.value.removeAllListeners).toBeCalled();
+    expect(scene.active.value.removeListener).toBeCalled();
   });
 
   describe('loading prop', () => {
