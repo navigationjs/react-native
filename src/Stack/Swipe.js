@@ -35,6 +35,7 @@ export default class Swipe extends Component {
         directionalLockEnabled={true}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        onLayout={this.reset}
         overScrollMode={'never'}
       >
         <View style={{ width, height }} />
