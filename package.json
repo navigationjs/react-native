@@ -1,6 +1,6 @@
 {
   "name": "@navigationjs/react-native",
-  "version": "0.31.11",
+  "version": "0.32.0",
   "description": "Simple and well-tested React Native navigation",
   "main": "index.js",
   "author": "Ivan Zotov <me@ivanzotov.com> (http://ivanzotov.com/)",
@@ -42,7 +42,7 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "@navigationjs/core": "0.7.0",
+    "@navigationjs/core": "0.8.0",
     "@railsmob/events": "0.2.0"
   }
 }
