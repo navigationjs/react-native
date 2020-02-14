@@ -9,10 +9,30 @@ export default class Swipe extends Component {
   index = 0;
   dragging = false;
   locked = false;
+  listener = undefined;
 
   componentDidMount() {
+    const { id } = this.props;
+    const [navigatorName, sceneName] = fromId(id);
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+
+    scene.active.value.addListener(({ value }) => {
+      if (value < 1) this.reset();
+    });
+
     setTimeout(this.reset, 0);
   }
+
+  componentWillUnmount() {
+    const { id } = this.props;
+    const [navigatorName, sceneName] = fromId(id);
+    const navigator = navigation.navigators[navigatorName];
+    const scene = navigator.scenes[sceneName];
+    scene.active.value.removeListener(this.listener);
+  }
+
+  isSceneActive = () => navigation.id() === this.props.id;
 
   render() {
     const { disabled, children } = this.props;
@@ -49,17 +69,12 @@ export default class Swipe extends Component {
     if (this.locked) return;
     this.locked = true;
 
-    const { id, onSwipe } = this.props;
-    const [navigatorName, sceneName] = fromId(id);
-    const navigator = navigation.navigators[navigatorName];
-    const scene = navigator.scenes[sceneName];
-    if (scene.active._value === 0) {
-      this.reset();
-      this.locked = false;
-      return;
+    const { onSwipe } = this.props;
+
+    if (onSwipe && this.isSceneActive()) {
+      await onSwipe();
     }
-    await scene.hide(0);
-    onSwipe && (await onSwipe());
+
     this.reset();
     this.locked = false;
   };
@@ -94,6 +109,8 @@ export default class Swipe extends Component {
   };
 
   handleHorizontalScroll = e => {
+    if (!this.isSceneActive()) this.reset();
+
     const offset = e.nativeEvent.contentOffset.x / width;
 
     const selectedIndex = Math.round(offset);
