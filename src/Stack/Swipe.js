@@ -49,7 +49,7 @@ export default class Swipe extends Component {
         onScrollEndDrag={this.onScrollEndDrag}
         onScroll={this.handleHorizontalScroll}
         onMomentumScrollEnd={this.onEnd}
-        scrollEventThrottle={100}
+        scrollEventThrottle={5}
         removeClippedSubviews={false}
         automaticallyAdjustContentInsets={false}
         directionalLockEnabled={true}
