@@ -33,6 +33,7 @@ export default class Swipe extends Component {
   }
 
   isSceneActive = () => navigation.id() === this.props.id;
+  shouldSwipe = () => this.props.shouldSwipe ? this.props.shouldSwipe() : this.isSceneActive()
 
   render() {
     const { disabled, children } = this.props;
@@ -71,7 +72,7 @@ export default class Swipe extends Component {
 
     const { onSwipe } = this.props;
 
-    if (onSwipe && this.isSceneActive()) {
+    if (onSwipe && this.shouldSwipe()) {
       await onSwipe();
     }
 
@@ -109,7 +110,7 @@ export default class Swipe extends Component {
   };
 
   handleHorizontalScroll = e => {
-    if (!this.isSceneActive()) this.reset();
+    if (!this.shouldSwipe()) this.reset();
 
     const offset = e.nativeEvent.contentOffset.x / width;
 
