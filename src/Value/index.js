@@ -20,6 +20,7 @@ export default class Value {
           toValue: value,
           duration,
           easing: this.easing,
+          useNativeDriver: false,
         }).start(() => {
           resolve();
         });
